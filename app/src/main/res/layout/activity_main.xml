@@ -109,8 +109,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:divider="@android:color/darker_gray"
+        android:divider="@color/lineColor"
         android:dividerHeight="0.5dp"
+        android:footerDividersEnabled="false"
         android:paddingEnd="5dp"
         android:paddingStart="5dp"
         android:scrollbars="none" />
