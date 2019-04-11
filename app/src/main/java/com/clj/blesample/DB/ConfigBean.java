@@ -6,7 +6,7 @@ import org.litepal.crud.DataSupport;
 public class ConfigBean extends DataSupport {
 
 
-    @Column(unique = true,nullable = false)
+    @Column(unique = true, nullable = false)
     private int mId;
     @Column(nullable = false)
     private String mName;
