@@ -34,6 +34,7 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.clj.blesample.DB.ConfigBean;
 import com.clj.blesample.adapter.DeviceAdapter;
 import com.clj.blesample.comm.ObserverManager;
 import com.clj.blesample.operation.OperationActivity;
@@ -125,6 +126,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setSupportActionBar(toolbar);
         //生成数据库
         SQLiteDatabase db = Connector.getDatabase();
+        ConfigBean configBean =new ConfigBean() ;
+        configBean.setmAge("25");
+        configBean.setmName("sb");
+        configBean.save();
         btn_scan = (Button) findViewById(R.id.btn_scan);
         btn_scan.setText(getString(R.string.start_scan));
         btn_scan.setOnClickListener(this);
