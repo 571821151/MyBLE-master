@@ -37,5 +37,7 @@
     <string name="connected">已连接</string>
     <string name="disconnect">断开连接</string>
     <string name="enter">进入操作</string>
+    <string name="blueToothConnected" >蓝牙已连接</string>
+    <string name="controlCenter">控 制 中 心</string>
 
 </resources>

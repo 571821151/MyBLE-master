@@ -37,6 +37,8 @@ import android.widget.Toast;
 import com.clj.blesample.DB.ConfigBean;
 import com.clj.blesample.adapter.DeviceAdapter;
 import com.clj.blesample.comm.ObserverManager;
+import com.clj.blesample.comm.Utils;
+import com.clj.blesample.operation.OperateActivity;
 import com.clj.blesample.operation.OperationActivity;
 import com.clj.fastble.BleManager;
 import com.clj.fastble.callback.BleGattCallback;
@@ -47,6 +49,7 @@ import com.clj.fastble.data.BleDevice;
 import com.clj.fastble.exception.BleException;
 import com.clj.fastble.scan.BleScanRuleConfig;
 
+import org.litepal.crud.DataSupport;
 import org.litepal.tablemanager.Connector;
 
 import java.util.ArrayList;
@@ -103,6 +106,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (v.getId()) {
             case R.id.btn_scan:
                 if (btn_scan.getText().equals(getString(R.string.start_scan))) {
+                    try {
+                        Intent intent = new Intent(MainActivity.this, OperateActivity.class);
+                        startActivity(intent);
+                    } catch (Exception e) {
+                        Log.d(TAG, "initView: " + e.toString());
+
+                    }
                     checkPermissions();
                 } else if (btn_scan.getText().equals(getString(R.string.stop_scan))) {
                     BleManager.getInstance().cancelScan();
@@ -125,11 +135,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         //生成数据库
-        SQLiteDatabase db = Connector.getDatabase();
-        ConfigBean configBean =new ConfigBean() ;
-        configBean.setmAge("25");
-        configBean.setmName("sb");
-        configBean.save();
+//        ConfigBean configBean = new ConfigBean();
+//        configBean.setmAge("25");
+//        configBean.setmName("sb");
+//        configBean.save();
+        Utils.Toast(getApplicationContext(), "okokook");
+        try {
+            List<ConfigBean> list = DataSupport.findAll(ConfigBean.class);
+            Log.d("", list.get(0).getmName());
+        } catch (Exception e) {
+
+            Log.e(TAG, "initView: ", e);
+        }
+
         btn_scan = (Button) findViewById(R.id.btn_scan);
         btn_scan.setText(getString(R.string.start_scan));
         btn_scan.setOnClickListener(this);
@@ -178,6 +196,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         });
         ListView listView_device = (ListView) findViewById(R.id.list_device);
         listView_device.setAdapter(mDeviceAdapter);
+
     }
 
     private void showConnectedDevice() {
