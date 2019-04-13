@@ -7,4 +7,6 @@
     <color name="backOfMain">#f3f3f7</color>
     <color name="black">#000000</color>
     <color name="controlCenterColor">#484848</color>
+    <color name="white">#ffffff</color>
+    <color name="btn_back_left">#995607</color>
 </resources>
