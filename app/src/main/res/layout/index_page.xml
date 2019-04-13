@@ -42,7 +42,9 @@
 
             <ListView
                 android:layout_width="match_parent"
-                android:layout_height="200dp"></ListView>
+                android:layout_height="200dp">
+
+            </ListView>
 
             <Button
                 android:layout_width="match_parent"
