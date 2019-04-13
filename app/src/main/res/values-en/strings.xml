@@ -37,6 +37,9 @@
     <string name="connected">Connected</string>
     <string name="disconnect">Disconnect</string>
     <string name="enter">Enter</string>
-    <string name="blueToothConnected" >Bluetooth Connected</string>
-    <string name="controlCenter">Control Center</string>
+    <string name="blueToothConnected">Bluetooth Connected</string>
+    <string name="controlCenter">CONTROL CENTER</string>
+    <string name="selectDevice">SELECT DEVICE</string>
+
+    <string name="matchedEquipment">Matched Equipment</string>
 </resources>

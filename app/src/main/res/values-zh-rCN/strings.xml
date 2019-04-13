@@ -39,4 +39,6 @@
     <string name="enter">进入操作</string>
     <string name="blueToothConnected">蓝牙已连接</string>
     <string name="controlCenter">控制中心</string>
+    <string name="selectDevice">设 备 选 择</string>
+    <string name="matchedEquipment">已配对设备</string>
 </resources>
