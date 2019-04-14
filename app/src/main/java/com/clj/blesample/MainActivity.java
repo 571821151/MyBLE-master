@@ -106,13 +106,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (v.getId()) {
             case R.id.btn_scan:
                 if (btn_scan.getText().equals(getString(R.string.start_scan))) {
-                    try {
-                        Intent intent = new Intent(MainActivity.this, OperateActivity.class);
-                        startActivity(intent);
-                    } catch (Exception e) {
-                        Log.d(TAG, "initView: " + e.toString());
 
-                    }
                     checkPermissions();
                 } else if (btn_scan.getText().equals(getString(R.string.stop_scan))) {
                     BleManager.getInstance().cancelScan();
