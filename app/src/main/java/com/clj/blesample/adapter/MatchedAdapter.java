@@ -20,6 +20,9 @@ public class MatchedAdapter extends BaseAdapter {
     private Context context;
     private List<String> lists;
 
+    public void addItem(String item) {
+        lists.add(item);
+    }
 
     public MatchedAdapter(Context context) {
         this.context = context;
@@ -28,7 +31,7 @@ public class MatchedAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return 0;
+        return lists.size();
     }
 
     @Override
@@ -50,10 +53,10 @@ public class MatchedAdapter extends BaseAdapter {
         if (view != null) {
             holder = (ViewHolder) view.getTag();
         } else {
-            view = View.inflate(context, R.layout.adapter_device, null);
+            view = View.inflate(context, R.layout.adapter_matched, null);
             holder = new MatchedAdapter.ViewHolder();
             view.setTag(holder);
-            holder.tvMatched = (TextView) view.findViewById(R.id.txt_mac);
+            holder.tvMatched = (TextView) view.findViewById(R.id.txt_matched);
         }
         final Object bleDevice = getItem(i);
         if (bleDevice != null) {

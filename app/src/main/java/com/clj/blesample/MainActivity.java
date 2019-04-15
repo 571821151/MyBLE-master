@@ -68,10 +68,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Button btn_scan;
     private EditText et_name, et_mac, et_uuid;
     private Switch sw_auto;
+    private Button btn_app;
     private ImageView img_loading;
 
     private Animation operatingAnim;
     private DeviceAdapter mDeviceAdapter;
+
     private ProgressDialog progressDialog;
 
     @Override
@@ -122,6 +124,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     txt_setting.setText(getString(R.string.retrieve_search_settings));
                 }
                 break;
+            case R.id.btn_start_app:
+                Intent intent = new Intent(MainActivity.this, OperateActivity.class);
+                startActivity(intent);
+
         }
     }
 
@@ -153,7 +159,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         layout_setting = (LinearLayout) findViewById(R.id.layout_setting);
         txt_setting = (TextView) findViewById(R.id.txt_setting);
+        btn_app = findViewById(R.id.btn_start_app);
         txt_setting.setOnClickListener(this);
+        btn_app.setOnClickListener(this);
         layout_setting.setVisibility(View.GONE);
         txt_setting.setText(getString(R.string.expand_search_settings));
 
