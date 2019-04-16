@@ -47,7 +47,7 @@ public class MatchedAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int i, View view, ViewGroup viewGroup) {
+    public View getView(int i,  View view, ViewGroup viewGroup) {
         ViewHolder holder;
 
         if (view != null) {
@@ -66,6 +66,7 @@ public class MatchedAdapter extends BaseAdapter {
             @Override
             public void onClick(View view) {
                 Utils.Toast(context, "hello world");
+
             }
         });
         return view;

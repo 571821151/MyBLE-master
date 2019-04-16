@@ -55,12 +55,13 @@
                 android:background="@mipmap/button_sd" />
 
             <Button
+                android:id="@+id/btn_connect_xy"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="35dp"
-                android:layout_marginRight="35dp"
                 android:layout_marginTop="21dp"
-                android:background="@mipmap/button_sd" />
+                android:layout_marginRight="35dp"
+                android:background="@mipmap/button_ld" />
         </LinearLayout>
     </FrameLayout>
 
