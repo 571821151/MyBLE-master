@@ -37,8 +37,11 @@
     <string name="connected">已连接</string>
     <string name="disconnect">断开连接</string>
     <string name="enter">进入操作</string>
-    <string name="blueToothConnected" >蓝牙已连接</string>
+    <string name="blueToothConnected">蓝牙已连接</string>
     <string name="controlCenter">控 制 中 心</string>
     <string name="selectDevice">设 备 选 择</string>
     <string name="matchedEquipment">已配对设备</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

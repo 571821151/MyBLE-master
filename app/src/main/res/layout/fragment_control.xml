@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:padding="10dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/btn_left_up"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="top"
+            android:layout_weight="1"
+            android:background="@mipmap/bluetooth" />
+
+        <Button
+            android:id="@+id/btn_left_down"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="bottom"
+            android:layout_weight="1"
+            android:background="@mipmap/bluetooth" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/btn_mid_up"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="top"
+            android:layout_weight="1"
+            android:background="@mipmap/bluetooth" />
+
+        <Button
+            android:id="@+id/btn_mid_down"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="bottom"
+            android:layout_weight="1"
+            android:background="@mipmap/bluetooth" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/btn_right_up"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="top"
+            android:layout_weight="1"
+            android:background="@mipmap/bluetooth" />
+
+        <Button
+            android:id="@+id/btn_right_down"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="bottom"
+            android:layout_weight="1"
+            android:background="@mipmap/bluetooth" />
+    </LinearLayout>
+
+
+</LinearLayout>

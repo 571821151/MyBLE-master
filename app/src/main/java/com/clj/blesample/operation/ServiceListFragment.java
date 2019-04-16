@@ -37,11 +37,11 @@ public class ServiceListFragment extends Fragment {
     }
 
     private void initView(View v) {
-        txt_name = (TextView) v.findViewById(R.id.txt_name);
-        txt_mac = (TextView) v.findViewById(R.id.txt_mac);
+        txt_name = v.findViewById(R.id.txt_name);
+        txt_mac = v.findViewById(R.id.txt_mac);
 
         mResultAdapter = new ResultAdapter(getActivity());
-        ListView listView_device = (ListView) v.findViewById(R.id.list_service);
+        ListView listView_device = v.findViewById(R.id.list_service);
         listView_device.setAdapter(mResultAdapter);
         listView_device.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
