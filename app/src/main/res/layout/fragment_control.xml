@@ -2,28 +2,27 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal"
-    android:padding="10dp">
+    android:orientation="horizontal">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1"
+        android:layout_weight="1"  android:padding="10dp"
         android:background="@mipmap/bottom"
         android:orientation="vertical">
 
         <Button
             android:id="@+id/btn_left_up"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_gravity="top"
             android:layout_weight="1"
             android:background="@mipmap/btn_left_up" />
 
         <Button
             android:id="@+id/btn_left_down"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_gravity="bottom"
             android:layout_weight="1"
             android:background="@mipmap/btn_left_down" />
@@ -34,20 +33,21 @@
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:background="@mipmap/bottom"
+        android:padding="10dp"
         android:orientation="vertical">
 
         <Button
             android:id="@+id/btn_mid_up"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_gravity="top"
             android:layout_weight="1"
             android:background="@mipmap/btn_mid_up" />
 
         <Button
             android:id="@+id/btn_mid_down"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_gravity="bottom"
             android:layout_weight="1"
             android:background="@mipmap/btn_mid_down" />
@@ -56,22 +56,22 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1"
+        android:layout_weight="1"  android:padding="10dp"
         android:background="@mipmap/bottom"
         android:orientation="vertical">
 
         <Button
             android:id="@+id/btn_right_up"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_gravity="top"
             android:layout_weight="1"
             android:background="@mipmap/btn_right_up" />
 
         <Button
             android:id="@+id/btn_right_down"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_gravity="bottom"
             android:layout_weight="1"
             android:background="@mipmap/btn_right_down" />
