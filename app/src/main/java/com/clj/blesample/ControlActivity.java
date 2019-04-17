@@ -72,6 +72,7 @@ public class ControlActivity extends AppCompatActivity implements View.OnClickLi
             if (i == position) {
                 transaction.show(fragment);
             } else {
+
                 transaction.hide(fragment);
             }
             transaction.commit();
