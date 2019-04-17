@@ -1,4 +1,4 @@
-package com.clj.blesample;
+package com.clj.blesample.Fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -6,12 +6,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.clj.blesample.R;
 import com.clj.blesample.comm.Utils;
 
 
 public class ControlFragment extends Fragment implements View.OnClickListener {
-
-
 
 
     @Override
@@ -21,13 +20,12 @@ public class ControlFragment extends Fragment implements View.OnClickListener {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_control, null);
         initView(v);
         return v;
     }
+
     private View initView(View v) {
 
         return v;

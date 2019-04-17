@@ -7,22 +7,15 @@ package com.clj.blesample.operation;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
 
 import com.clj.blesample.ControlActivity;
-import com.clj.blesample.ControlFragment;
-import com.clj.blesample.MainActivity;
 import com.clj.blesample.R;
 import com.clj.blesample.adapter.MatchedAdapter;
 import com.clj.blesample.comm.Utils;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class OperateActivity extends AppCompatActivity implements View.OnClickListener {
     private MatchedAdapter matchedAdapter;

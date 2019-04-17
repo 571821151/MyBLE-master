@@ -5,14 +5,14 @@
 package com.clj.blesample;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.view.View;
+import android.widget.Toast;
 
+import com.clj.blesample.Fragment.ControlFragment;
+import com.clj.blesample.Fragment.SetPositionFragment;
+import com.clj.blesample.Fragment.SettingFragment;
 import com.clj.blesample.operation.CharacteristicListFragment;
 import com.clj.blesample.operation.CharacteristicOperationFragment;
 
@@ -39,17 +39,13 @@ public class ControlActivity extends AppCompatActivity {
     public void changePage(int page) {
         currentPage = page;
         updateFragment(page);
-        if (currentPage == 1) {
-            ((CharacteristicListFragment) fragments.get(1)).showData();
-        } else if (currentPage == 2) {
-            ((CharacteristicOperationFragment) fragments.get(2)).showData();
-        }
+
     }
 
     private void prepareFragment() {
         fragments.add(new ControlFragment());
-        fragments.add(new CharacteristicListFragment());
-        fragments.add(new CharacteristicOperationFragment());
+        fragments.add(new SettingFragment());
+        fragments.add(new SetPositionFragment());
         for (Fragment fragment : fragments) {
             getSupportFragmentManager().beginTransaction().add(R.id.fragment_main, fragment).hide(fragment).commit();
         }
@@ -59,6 +55,7 @@ public class ControlActivity extends AppCompatActivity {
         if (position > fragments.size() - 1) {
             return;
         }
+
         for (int i = 0; i < fragments.size(); i++) {
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
             Fragment fragment = fragments.get(i);
