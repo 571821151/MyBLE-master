@@ -4,6 +4,7 @@
 
 package com.clj.blesample;
 
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -83,10 +84,20 @@ public class ControlActivity extends AppCompatActivity implements View.OnClickLi
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_control_left:
-                changePage(1);
+                changePage(0);
+               switch (currentPage){
+                   case 0:
+
+                     getResources().
+                       break;
+                   case 1:
+                       break;
+
+               }
+
                 break;
             case R.id.btn_control_right:
-                changePage(2);
+                changePage(1);
                 break;
         }
     }
