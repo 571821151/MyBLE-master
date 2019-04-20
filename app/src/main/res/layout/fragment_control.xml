@@ -2,81 +2,110 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal"
-    android:background="@drawable/shape_corner">
+
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1"  android:padding="10dp"
-        android:background="@mipmap/bottom"
-        android:orientation="vertical">
+        android:layout_height="0dp"
+        android:layout_weight="3.5"
+        android:background="@drawable/shape_corner"
+        android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/btn_left_up"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_gravity="top"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="15.5dp"
+            android:layout_marginRight="5.5dp"
+            android:layout_marginBottom="17dp"
             android:layout_weight="1"
-            android:background="@mipmap/btn_left_up" />
+            android:background="@mipmap/bottom"
+            android:orientation="vertical"
+            android:padding="10dp">
 
-        <Button
-            android:id="@+id/btn_left_down"
+            <Button
+                android:id="@+id/btn_left_up"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="top"
+                android:layout_weight="1"
+                android:background="@mipmap/btn_left_up" />
+
+            <Button
+                android:id="@+id/btn_left_down"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="bottom"
+                android:layout_weight="1"
+                android:background="@mipmap/btn_left_down" />
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_gravity="bottom"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="15.5dp"
+            android:layout_marginRight="5.5dp"
+            android:layout_marginBottom="17dp"
             android:layout_weight="1"
-            android:background="@mipmap/btn_left_down" />
+            android:background="@mipmap/bottom"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+            <Button
+                android:id="@+id/btn_mid_up"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="top"
+                android:layout_weight="1"
+                android:background="@mipmap/btn_mid_up" />
+
+            <Button
+                android:id="@+id/btn_mid_down"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="bottom"
+                android:layout_weight="1"
+                android:background="@mipmap/btn_mid_down" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="15.5dp"
+            android:layout_marginRight="5.5dp"
+            android:layout_marginBottom="17dp"
+            android:layout_weight="1"
+            android:background="@mipmap/bottom"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+            <Button
+                android:id="@+id/btn_right_up"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="top"
+                android:layout_weight="1"
+                android:background="@mipmap/btn_right_up" />
+
+            <Button
+                android:id="@+id/btn_right_down"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="bottom"
+                android:layout_weight="1"
+                android:background="@mipmap/btn_right_down" />
+        </LinearLayout>
     </LinearLayout>
-
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
         android:layout_weight="1"
-        android:background="@mipmap/bottom"
-        android:padding="10dp"
-        android:orientation="vertical">
+        android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/btn_mid_up"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="top"
-            android:layout_weight="1"
-            android:background="@mipmap/btn_mid_up" />
 
-        <Button
-            android:id="@+id/btn_mid_down"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="bottom"
-            android:layout_weight="1"
-            android:background="@mipmap/btn_mid_down" />
     </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1"  android:padding="10dp"
-        android:background="@mipmap/bottom"
-        android:orientation="vertical">
-
-        <Button
-            android:id="@+id/btn_right_up"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="top"
-            android:layout_weight="1"
-            android:background="@mipmap/btn_right_up" />
-
-        <Button
-            android:id="@+id/btn_right_down"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="bottom"
-            android:layout_weight="1"
-            android:background="@mipmap/btn_right_down" />
-    </LinearLayout>
-
 
 </LinearLayout>

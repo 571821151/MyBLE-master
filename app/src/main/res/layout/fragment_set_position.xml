@@ -2,39 +2,137 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/shape_corner"
     android:orientation="vertical">
-
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    android:orientation="vertical"
+    android:layout_weight="0.3">
     <ImageView
-        android:layout_width="50dp"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:src="@mipmap/bluetooth" />
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="24dp"
+        android:layout_marginTop="11dp"
+        android:layout_marginBottom="11dp"
+        android:src="@mipmap/icon_setting" />
+    <LinearLayout
+        android:layout_marginStart="14.5dp"
+        android:layout_marginLeft="14.5dp"
+        android:layout_marginRight="14.5dp"
+        android:layout_marginEnd="14.5dp"
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:background="@color/lineColor"></LinearLayout>
+</LinearLayout>
+
 
     <LinearLayout
+        android:layout_marginTop="37.5dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
+        android:layout_height="0dp"
+        android:layout_weight="0.57"
+        android:orientation="horizontal"
         android:padding="10dp">
 
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:background="@mipmap/icon_p1"
+                android:gravity="center_horizontal" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+
+
+                android:text="P1"
+                android:textColor="#ff595959"
+                android:textSize="15sp" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:background="@mipmap/icon_p2"
+                android:gravity="center_horizontal" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+
+
+                android:text="P1"
+                android:textColor="#ff595959"
+                android:textSize="15sp" />
+        </LinearLayout> <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:background="@mipmap/icon_p3"
+            android:gravity="center_horizontal" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+
+
+            android:text="P1"
+            android:textColor="#ff595959"
+            android:textSize="15sp" />
+    </LinearLayout>
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:padding="10dp">
+        android:layout_height="0dp"
+        android:layout_weight="0.22"
+        android:layout_marginLeft="18dp"
+        android:layout_marginRight="18dp"
+        android:orientation="horizontal"
+        android:layout_marginBottom="46dp"
+      >
 
         <Button
             android:id="@+id/btn_set"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1" />
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginRight="12.5dp"
+            android:layout_gravity="bottom"
+            android:background="@mipmap/button_ok" />
 
         <Button
             android:id="@+id/btn_cancel_set"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1" />
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginLeft="12.5dp"
+            android:layout_gravity="bottom"
+            android:background="@mipmap/button_cancel" />
     </LinearLayout>
 
 </LinearLayout>
