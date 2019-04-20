@@ -98,7 +98,6 @@ public class ControlActivity extends AppCompatActivity implements View.OnClickLi
     private void changeBtnImage() {
         switch (currentPage) {
             case 0:
-
                 btn_left.setBackgroundResource(R.mipmap.btn_left);
                 btn_right.setBackgroundResource(R.mipmap.btn_right);
 
