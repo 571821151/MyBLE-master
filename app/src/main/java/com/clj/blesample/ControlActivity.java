@@ -85,20 +85,29 @@ public class ControlActivity extends AppCompatActivity implements View.OnClickLi
         switch (view.getId()) {
             case R.id.btn_control_left:
                 changePage(0);
-               switch (currentPage){
-                   case 0:
-
-                     getResources().
-                       break;
-                   case 1:
-                       break;
-
-               }
+                changeBtnImage();
 
                 break;
             case R.id.btn_control_right:
                 changePage(1);
+                changeBtnImage();
                 break;
+        }
+    }
+
+    private void changeBtnImage() {
+        switch (currentPage) {
+            case 0:
+
+                btn_left.setBackgroundResource(R.mipmap.btn_left);
+                btn_right.setBackgroundResource(R.mipmap.btn_right);
+
+                break;
+            case 1:
+                btn_left.setBackgroundResource(R.mipmap.control);
+                btn_right.setBackgroundResource(R.mipmap.mode);
+                break;
+
         }
     }
 }
