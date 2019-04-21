@@ -145,10 +145,10 @@ public class ControlFragment extends Fragment implements View.OnClickListener, V
             switch (viewId) {
                 case R.id.btn_left_up:
                     Bitmap bitmap = ((BitmapDrawable) (getResources()
-                            .getDrawable(R.mipmap.logo)))
+                            .getDrawable(R.mipmap.logo1)))
                             .getBitmap();
 
-                    // 设置图片旋转的角度
+
                     matrix.setRotate(progress += 10);
                     bitmap = Bitmap.createBitmap(
                             bitmap,
