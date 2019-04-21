@@ -9,6 +9,10 @@
 
     <TextView
         android:id="@+id/txt_matched"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_width="77dp"
+        android:layout_height="52.5dp"
+        android:gravity="center|left"
+        android:text="WT-1200XM"
+        android:textColor="#ff161616"
+        android:textSize="13sp" />
 </LinearLayout>

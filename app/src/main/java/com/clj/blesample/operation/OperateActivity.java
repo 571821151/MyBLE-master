@@ -31,6 +31,21 @@ public class OperateActivity extends AppCompatActivity implements View.OnClickLi
         btn_link.setOnClickListener(this);
         matchedAdapter.addItem("2123123");
         matchedAdapter.addItem("2123123s");
+
+        matchedAdapter.addItem("2123123dd");
+
+        matchedAdapter.addItem("2123123dd");
+
+        matchedAdapter.addItem("2123123dd");
+        matchedAdapter.addItem("2123123dd");
+
+        matchedAdapter.addItem("2123123dd");
+
+        matchedAdapter.addItem("2123123dd");
+        matchedAdapter.addItem("2123123dd");
+
+        matchedAdapter.addItem("2123123dd");
+
         matchedAdapter.addItem("2123123dd");
         listView_device.setAdapter(matchedAdapter);
     }

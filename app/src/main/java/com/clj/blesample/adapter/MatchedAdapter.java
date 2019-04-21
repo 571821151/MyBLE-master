@@ -60,7 +60,7 @@ public class MatchedAdapter extends BaseAdapter {
         }
         final Object bleDevice = getItem(i);
         if (bleDevice != null) {
-            holder.tvMatched.setText("hello world");
+            holder.tvMatched.setText(lists.get(i));
         }
         holder.tvMatched.setOnClickListener(new View.OnClickListener() {
             @Override
