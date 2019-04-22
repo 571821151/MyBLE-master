@@ -1,6 +1,7 @@
 package com.clj.blesample.Fragment;
 
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
@@ -19,6 +20,7 @@ import android.widget.Switch;
 
 import com.clj.blesample.ControlActivity;
 import com.clj.blesample.R;
+import com.clj.blesample.View.PaintBoard;
 import com.clj.blesample.comm.Utils;
 
 import java.util.concurrent.Executors;
@@ -29,7 +31,10 @@ import java.util.concurrent.TimeUnit;
 public class ControlFragment extends Fragment implements View.OnClickListener, View.OnTouchListener {
 
     private Button btn_left_up;
+    private Button btn_right_up;
+    private Button btn_right_down;
     private ImageView image_main;
+    private PaintBoard paintBoard_right;
     private Matrix matrix = new Matrix();
     private ScheduledExecutorService scheduledExecutor;
 
@@ -48,10 +53,16 @@ public class ControlFragment extends Fragment implements View.OnClickListener, V
 
     private View initView(View v) {
         image_main = (getActivity()).findViewById(R.id.image_main);
-//        image_main = v.findViewById(R.id.image_main);
+        paintBoard_right = (getActivity()).findViewById(R.id.img_right);
+
+
         btn_left_up = v.findViewById(R.id.btn_left_up);
+        btn_right_up = v.findViewById(R.id.btn_right_up);
+        btn_right_down = v.findViewById(R.id.btn_right_down);
+        btn_right_down.setOnTouchListener(this);
         btn_left_up.setOnClickListener(this);
         btn_left_up.setOnTouchListener(this);
+        btn_right_up.setOnTouchListener(this);
         return v;
     }
 
@@ -160,8 +171,15 @@ public class ControlFragment extends Fragment implements View.OnClickListener, V
                             true);
                     image_main.setImageBitmap(bitmap);
                     break;
-
+                case R.id.btn_right_up:
+                    paintBoard_right.SetDegreen(progress += 5);
+                    break;
+                case R.id.btn_right_down:
+                    paintBoard_right.SetDegreen(progress -= 5);
+                    break;
             }
         }
     };
+
+
 }

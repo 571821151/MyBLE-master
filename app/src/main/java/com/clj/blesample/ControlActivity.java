@@ -16,6 +16,7 @@ import android.widget.Toast;
 import com.clj.blesample.Fragment.ControlFragment;
 import com.clj.blesample.Fragment.SetPositionFragment;
 import com.clj.blesample.Fragment.SettingFragment;
+import com.clj.blesample.View.PaintBoard;
 import com.clj.blesample.operation.CharacteristicListFragment;
 import com.clj.blesample.operation.CharacteristicOperationFragment;
 

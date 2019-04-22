@@ -49,11 +49,11 @@
                 android:layout_weight="1"
                 android:src="@mipmap/logo2" />
 
-            <ImageView
+            <com.clj.blesample.View.PaintBoard
+                android:id="@+id/img_right"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:src="@mipmap/logo3" />
+                android:layout_weight="1" />
         </LinearLayout>
 
 
