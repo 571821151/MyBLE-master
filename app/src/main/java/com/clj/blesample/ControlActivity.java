@@ -16,7 +16,6 @@ import android.widget.Toast;
 import com.clj.blesample.Fragment.ControlFragment;
 import com.clj.blesample.Fragment.SetPositionFragment;
 import com.clj.blesample.Fragment.SettingFragment;
-import com.clj.blesample.View.PaintBoard;
 import com.clj.blesample.operation.CharacteristicListFragment;
 import com.clj.blesample.operation.CharacteristicOperationFragment;
 
@@ -39,6 +38,8 @@ public class ControlActivity extends AppCompatActivity implements View.OnClickLi
         btn_right = findViewById(R.id.btn_control_right);
         btn_right.setOnClickListener(this);
     }
+
+
 
     private void initPage() {
 

@@ -20,8 +20,12 @@ public class MatchedAdapter extends BaseAdapter {
     private Context context;
     private List<String> lists;
 
-    public void addItem(String item) {
+    public void addDevice(String item) {
         lists.add(item);
+    }
+
+    public void clearConnectedDevice() {
+        lists.clear();
     }
 
     public MatchedAdapter(Context context) {
@@ -47,7 +51,7 @@ public class MatchedAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int i,  View view, ViewGroup viewGroup) {
+    public View getView(int i, View view, ViewGroup viewGroup) {
         ViewHolder holder;
 
         if (view != null) {

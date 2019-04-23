@@ -1,7 +1,6 @@
 package com.clj.blesample.Fragment;
 
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
@@ -12,13 +11,9 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.RotateAnimation;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.Switch;
 
-import com.clj.blesample.ControlActivity;
 import com.clj.blesample.R;
 import com.clj.blesample.View.PaintBoard;
 import com.clj.blesample.comm.Utils;
@@ -29,6 +24,8 @@ import java.util.concurrent.TimeUnit;
 
 
 public class ControlFragment extends Fragment implements View.OnClickListener, View.OnTouchListener {
+    private boolean isTouched = false;
+
 
     private Button btn_left_up;
     private Button btn_right_up;
@@ -66,7 +63,7 @@ public class ControlFragment extends Fragment implements View.OnClickListener, V
         return v;
     }
 
-    int progress = 0;
+    int progress = 30;
 
     @Override
     public void onClick(View view) {
@@ -94,36 +91,19 @@ public class ControlFragment extends Fragment implements View.OnClickListener, V
         }
     }
 
-    public boolean onLongClick(View view) {
-        switch (view.getId()) {
-            case R.id.btn_left_up:
-                Bitmap bitmap = ((BitmapDrawable) (getResources()
-                        .getDrawable(R.mipmap.logo)))
-                        .getBitmap();
-
-                // 设置图片旋转的角度
-                matrix.setRotate(progress += 10);
-                bitmap = Bitmap.createBitmap(
-                        bitmap,
-                        0,
-                        0,
-                        bitmap.getWidth(),
-                        bitmap.getHeight(),
-                        matrix,
-                        true);
-                image_main.setImageBitmap(bitmap);
-                break;
-
-        }
-        return true;
-    }
 
     @Override
     public boolean onTouch(View view, MotionEvent event) {
+
+        if (isTouched)
+            return false;
         if (event.getAction() == MotionEvent.ACTION_DOWN) {
+
             updateAddOrSubtract(view.getId());    //手指按下时触发不停的发送消息
+            isTouched = true;
         } else if (event.getAction() == MotionEvent.ACTION_UP) {
             stopAddOrSubtract();    //手指抬起时停止发送
+            isTouched = false;
         }
         return true;
 
@@ -158,9 +138,7 @@ public class ControlFragment extends Fragment implements View.OnClickListener, V
                     Bitmap bitmap = ((BitmapDrawable) (getResources()
                             .getDrawable(R.mipmap.logo1)))
                             .getBitmap();
-
-
-                    matrix.setRotate(progress += 10);
+                    matrix.setRotate(progress += 10, bitmap.getWidth(), bitmap.getHeight());
                     bitmap = Bitmap.createBitmap(
                             bitmap,
                             0,
@@ -172,10 +150,10 @@ public class ControlFragment extends Fragment implements View.OnClickListener, V
                     image_main.setImageBitmap(bitmap);
                     break;
                 case R.id.btn_right_up:
-                    paintBoard_right.SetDegreen(progress += 5);
+                    paintBoard_right.SetDegree(progress += 5);
                     break;
                 case R.id.btn_right_down:
-                    paintBoard_right.SetDegreen(progress -= 5);
+                    paintBoard_right.SetDegree(progress -= 5);
                     break;
             }
         }

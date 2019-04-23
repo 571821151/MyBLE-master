@@ -16,6 +16,10 @@ import com.clj.blesample.ControlActivity;
 import com.clj.blesample.R;
 import com.clj.blesample.adapter.MatchedAdapter;
 import com.clj.blesample.comm.Utils;
+import com.clj.fastble.BleManager;
+import com.clj.fastble.data.BleDevice;
+
+import java.util.List;
 
 public class OperateActivity extends AppCompatActivity implements View.OnClickListener {
     private MatchedAdapter matchedAdapter;
@@ -29,24 +33,12 @@ public class OperateActivity extends AppCompatActivity implements View.OnClickLi
         ListView listView_device = findViewById(R.id.mainList);
         btn_link = findViewById(R.id.btn_connect_xy);
         btn_link.setOnClickListener(this);
-        matchedAdapter.addItem("2123123");
-        matchedAdapter.addItem("2123123s");
-
-        matchedAdapter.addItem("2123123dd");
-
-        matchedAdapter.addItem("2123123dd");
-
-        matchedAdapter.addItem("2123123dd");
-        matchedAdapter.addItem("2123123dd");
-
-        matchedAdapter.addItem("2123123dd");
-
-        matchedAdapter.addItem("2123123dd");
-        matchedAdapter.addItem("2123123dd");
-
-        matchedAdapter.addItem("2123123dd");
-
-        matchedAdapter.addItem("2123123dd");
+        List<BleDevice> deviceList = BleManager.getInstance().getAllConnectedDevice();
+        matchedAdapter.clearConnectedDevice();
+        for (BleDevice bleDevice : deviceList) {
+            matchedAdapter.addDevice(bleDevice.getName());
+        }
+        matchedAdapter.notifyDataSetChanged();
         listView_device.setAdapter(matchedAdapter);
     }
 
