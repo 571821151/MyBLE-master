@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -63,7 +64,7 @@ public class ControlFragment extends Fragment implements View.OnClickListener, V
         return v;
     }
 
-    int progress = 30;
+    int progress = 0;
 
     @Override
     public void onClick(View view) {
@@ -95,10 +96,10 @@ public class ControlFragment extends Fragment implements View.OnClickListener, V
     @Override
     public boolean onTouch(View view, MotionEvent event) {
 
-        if (isTouched)
-            return false;
-        if (event.getAction() == MotionEvent.ACTION_DOWN) {
 
+        if (event.getAction() == MotionEvent.ACTION_DOWN) {
+            if (isTouched)
+                return false;
             updateAddOrSubtract(view.getId());    //手指按下时触发不停的发送消息
             isTouched = true;
         } else if (event.getAction() == MotionEvent.ACTION_UP) {
@@ -136,9 +137,10 @@ public class ControlFragment extends Fragment implements View.OnClickListener, V
             switch (viewId) {
                 case R.id.btn_left_up:
                     Bitmap bitmap = ((BitmapDrawable) (getResources()
-                            .getDrawable(R.mipmap.logo1)))
+                            .getDrawable(R.mipmap.logo2)))
                             .getBitmap();
-                    matrix.setRotate(progress += 10, bitmap.getWidth(), bitmap.getHeight());
+                    matrix.setRotate(progress += 10,0, 0);
+                    Log.d("cly", ""+progress);
                     bitmap = Bitmap.createBitmap(
                             bitmap,
                             0,

@@ -12,9 +12,11 @@ import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 
 import com.clj.blesample.R;
+import com.clj.blesample.comm.Utils;
 
 public class PaintBoard extends View {
 
@@ -32,6 +34,7 @@ public class PaintBoard extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
+        Utils.Toast(getContext(),"degree"+degree);
         if (degree > 50) return;
         double rect_angle = -degree / 180 * Math.PI;
 
