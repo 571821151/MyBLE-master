@@ -46,6 +46,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
+                android:choiceMode="singleChoice"
                 android:scrollbars="none">
 
             </ListView>
@@ -53,11 +54,12 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingTop="20dp"
                 android:layout_gravity="bottom"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:paddingTop="20dp">
 
                 <Button
+                    android:id="@+id/btn_search"
                     android:layout_width="197.5dp"
                     android:layout_height="32.5dp"
                     android:layout_gravity="center"

@@ -139,12 +139,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //        configBean.setmAge("25");
 //        configBean.setmName("sb");
 //        configBean.save();
-        Utils.Toast(getApplicationContext(), "okokook");
         try {
             List<ConfigBean> list = DataSupport.findAll(ConfigBean.class);
             Log.d("", list.get(0).getmName());
         } catch (Exception e) {
-
             Log.e(TAG, "initView: ", e);
         }
 
@@ -417,7 +415,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                             startActivityForResult(intent, REQUEST_CODE_OPEN_GPS);
                                         }
                                     })
-
                             .setCancelable(false)
                             .show();
                 } else {
