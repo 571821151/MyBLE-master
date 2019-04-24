@@ -4,20 +4,16 @@
 
 package com.clj.blesample;
 
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
 import com.clj.blesample.Fragment.ControlFragment;
 import com.clj.blesample.Fragment.SetPositionFragment;
 import com.clj.blesample.Fragment.SettingFragment;
-import com.clj.blesample.operation.CharacteristicListFragment;
-import com.clj.blesample.operation.CharacteristicOperationFragment;
 
 import java.util.ArrayList;
 import java.util.List;

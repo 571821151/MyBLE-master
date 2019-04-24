@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -16,6 +15,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 
 import com.clj.blesample.R;
+import com.clj.blesample.View.LeftBoard;
 import com.clj.blesample.View.PaintBoard;
 import com.clj.blesample.comm.Utils;
 
@@ -43,8 +43,8 @@ public class ControlFragment extends Fragment implements View.OnClickListener, V
     private Button btn_right_down;
 
 
-    private ImageView bar_left;
-    private PaintBoard paintBoard_right;
+    private LeftBoard bar_left;
+    private PaintBoard bar_right;
     private ImageView bar_mid;
 
     private Bitmap bitmap_left;
@@ -73,7 +73,7 @@ public class ControlFragment extends Fragment implements View.OnClickListener, V
 
     private View initView(View v) {
         bar_left = (getActivity()).findViewById(R.id.image_main);
-        paintBoard_right = (getActivity()).findViewById(R.id.img_right);
+        bar_right = (getActivity()).findViewById(R.id.img_right);
         bar_mid = (getActivity()).findViewById(R.id.image_mid);
 
         //left
@@ -170,12 +170,10 @@ public class ControlFragment extends Fragment implements View.OnClickListener, V
             int viewId = msg.what;
             switch (viewId) {
                 case R.id.btn_left_up:
-                    degree_left += 4;
-                    SetLeft(degree_left);
+                    setDegreeForLeft(true);
                     break;
                 case R.id.btn_left_down:
-                    degree_left -= 4;
-                    SetLeft(degree_left);
+                    setDegreeForLeft(false);
                     break;
                 case R.id.btn_mid_up:
                     height_mid += 4;
@@ -186,12 +184,39 @@ public class ControlFragment extends Fragment implements View.OnClickListener, V
                     setMidPosition();
                     break;
                 case R.id.btn_right_up:
-                    paintBoard_right.SetDegree(degree_right += 4);
+                    setDegreeForRight(true);
                     break;
                 case R.id.btn_right_down:
-                    paintBoard_right.SetDegree(degree_right -= 4);
+
+                    setDegreeForRight(false);
                     break;
             }
+        }
+
+        private void setDegreeForLeft(boolean is_up) {
+
+            if (is_up)
+                degree_left += 4;
+            else
+                degree_left -= 4;
+            if (degree_left > 60)
+                degree_left = 60;
+            if (degree_left < 0)
+                degree_left = 0;
+            bar_left.SetDegree(degree_left);
+        }
+
+        private void setDegreeForRight(boolean is_up) {
+
+            if (is_up)
+                degree_right -= 4;
+            else
+                degree_right += 4;
+            if (degree_right > 0)
+                degree_right = 0;
+            if (degree_right < -60)
+                degree_right = -60;
+            bar_right.SetDegree(degree_right);
         }
     };
 
@@ -200,15 +225,6 @@ public class ControlFragment extends Fragment implements View.OnClickListener, V
         if (height_mid < 0)
             return;
         bar_mid.setPadding(0, 0, 0, height_mid);
-    }
-
-    //设置左侧bar的旋转
-    private void SetLeft(float progress) {
-        if (progress < 0 || progress > 60) return;
-        matrix.setRotate(progress, bitmap_left.getWidth(), bitmap_left.getHeight());
-        Log.d("cly", "" + progress);
-        bitmap_left = Bitmap.createBitmap(bitmap_left, 0, 0, bitmap_left.getWidth(), bitmap_left.getHeight(), matrix, true);
-        bar_left.setImageBitmap(bitmap_left);
     }
 
 

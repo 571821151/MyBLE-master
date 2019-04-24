@@ -36,19 +36,19 @@
             android:layout_marginRight="40dp"
             android:orientation="horizontal">
 
-            <ImageView
+            <com.clj.blesample.View.LeftBoard
                 android:id="@+id/image_main"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:src="@mipmap/logo1" />
+                android:layout_weight="1" />
 
             <ImageView
                 android:id="@+id/image_mid"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:src="@mipmap/logo2" />
+                android:src="@mipmap/logo2"
+                android:contentDescription="TODO" />
 
             <com.clj.blesample.View.PaintBoard
                 android:id="@+id/img_right"

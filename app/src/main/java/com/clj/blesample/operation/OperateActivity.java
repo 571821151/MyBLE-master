@@ -40,6 +40,7 @@ public class OperateActivity extends AppCompatActivity implements View.OnClickLi
     //ui
     private SimpleDeviceAdapter matchedAdapter;
     private Button btn_link;
+    private Button btn_search;
     private ListView listView_device;
     private ProgressDialog progressDialog;
 
@@ -60,6 +61,14 @@ public class OperateActivity extends AppCompatActivity implements View.OnClickLi
 
     //初始化View
     private void initView() {
+        BleManager.getInstance().init(getApplication());
+        BleManager.getInstance()
+                .enableLog(true)
+                .setReConnectCount(1, 5000)
+                .setConnectOverTime(20000)
+                .setOperateTimeout(5000);
+
+
         matchedAdapter = new SimpleDeviceAdapter(this);
         listView_device = findViewById(R.id.mainList);
         listView_device.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -70,6 +79,9 @@ public class OperateActivity extends AppCompatActivity implements View.OnClickLi
         });
         btn_link = findViewById(R.id.btn_connect_xy);
         btn_link.setOnClickListener(this);
+        btn_search = findViewById(R.id.btn_search);
+        btn_search.setOnClickListener(this);
+
         listView_device.setAdapter(matchedAdapter);
     }
 
@@ -78,9 +90,11 @@ public class OperateActivity extends AppCompatActivity implements View.OnClickLi
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_connect_xy:
-                Utils.Toast(this, getApplicationContext().toString());
-
-
+//                Utils.Toast(this, getApplicationContext().toString());
+//                connect(device);
+                Intent intent = new Intent(getApplicationContext(), ControlActivity.class);
+//                intent.putExtra(OperationActivity.KEY_DATA, bleDevice);
+                startActivity(intent);
                 break;
             case R.id.btn_search:
                 BleManager.getInstance().scan(new BleScanCallback() {
@@ -100,14 +114,14 @@ public class OperateActivity extends AppCompatActivity implements View.OnClickLi
                         matchedAdapter.notifyDataSetChanged();
                     }
                 });
-                List<BleDevice> deviceList = BleManager.getInstance().getAllConnectedDevice();
-
-
-                matchedAdapter.clearConnectedDevice();
-                for (BleDevice bleDevice : deviceList) {
-                    matchedAdapter.addDevice(bleDevice);
-                }
-                matchedAdapter.notifyDataSetChanged();
+//                List<BleDevice> deviceList = BleManager.getInstance().getAllConnectedDevice();
+//
+//
+//                matchedAdapter.clearConnectedDevice();
+//                for (BleDevice bleDevice : deviceList) {
+//                    matchedAdapter.addDevice(bleDevice);
+//                }
+//                matchedAdapter.notifyDataSetChanged();
                 break;
         }
     }
