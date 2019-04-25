@@ -40,6 +40,6 @@
     <string name="blueToothConnected">蓝牙已连接</string>
     <string name="controlCenter">控 制 中 心</string>
     <string name="selectDevice">设 备 选 择</string>
-    <string name="matchedEquipment">已配对设备</string>
+    <string name="matchedEquipment">搜索到的设备</string>
 
 </resources>

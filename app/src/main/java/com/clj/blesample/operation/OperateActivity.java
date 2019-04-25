@@ -39,7 +39,6 @@ import com.clj.blesample.R;
 import com.clj.blesample.adapter.MatchedAdapter;
 import com.clj.blesample.comm.Observer;
 import com.clj.blesample.comm.ObserverManager;
-import com.clj.blesample.comm.Utils;
 import com.clj.fastble.BleManager;
 import com.clj.fastble.callback.BleGattCallback;
 import com.clj.fastble.callback.BleMtuChangedCallback;
@@ -109,6 +108,7 @@ public class OperateActivity extends AppCompatActivity implements View.OnClickLi
 
 
         progressDialog = new ProgressDialog(this);
+        checkPermissions();
     }
 
     @Override
@@ -128,34 +128,35 @@ public class OperateActivity extends AppCompatActivity implements View.OnClickLi
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_connect_xy:
-                Utils.Toast(this, getApplicationContext().toString());
-                if (device != null) {
-                    connect(device);
-                    Intent intent = new Intent(getApplicationContext(), ControlActivity.class);
+                Intent intent = new Intent(getApplicationContext(), ControlActivity.class);
 //                    intent.putExtra(OperationActivity.KEY_DATA, bleDevice);
-                    startActivity(intent);
+                startActivity(intent);
+                if (device != null) {
+                    // connect(device);
+
                 } else
                     Toast.makeText(OperateActivity.this, R.string.connect_fail, Toast.LENGTH_SHORT).show();
 
                 break;
             case R.id.btn_search:
-                BleManager.getInstance().scan(new BleScanCallback() {
-                    @Override
-                    public void onScanFinished(List<BleDevice> scanResultList) {
+                try {
+                    BleManager.getInstance().scan(new BleScanCallback() {
+                        @Override
+                        public void onScanFinished(List<BleDevice> scanResultList) {
 
-                    }
+                        }
 
-                    @Override
-                    public void onScanStarted(boolean success) {
+                        @Override
+                        public void onScanStarted(boolean success) {
 
-                    }
+                        }
 
-                    @Override
-                    public void onScanning(BleDevice bleDevice) {
-                        matchedAdapter.addDevice(bleDevice);
-                        matchedAdapter.notifyDataSetChanged();
-                    }
-                });
+                        @Override
+                        public void onScanning(BleDevice bleDevice) {
+                            matchedAdapter.addDevice(bleDevice);
+                            matchedAdapter.notifyDataSetChanged();
+                        }
+                    });
 //                List<BleDevice> deviceList = BleManager.getInstance().getAllConnectedDevice();
 //
 //
@@ -164,6 +165,9 @@ public class OperateActivity extends AppCompatActivity implements View.OnClickLi
 //                    matchedAdapter.addDevice(bleDevice);
 //                }
 //                matchedAdapter.notifyDataSetChanged();
+                } catch (Exception e) {
+                    Toast.makeText(OperateActivity.this, "" + e.toString(), Toast.LENGTH_SHORT).show();
+                }
                 break;
         }
     }
@@ -489,7 +493,7 @@ public class OperateActivity extends AppCompatActivity implements View.OnClickLi
                 holder = new ViewHolder();
                 convertView.setTag(holder);
 
-                holder.txt_name = convertView.findViewById(R.id.txt_name);
+                holder.txt_name = convertView.findViewById(R.id.txt_matched);
 
             }
 

@@ -11,7 +11,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.clj.blesample.R;
-import com.clj.blesample.comm.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -69,7 +68,6 @@ public class MatchedAdapter extends BaseAdapter {
         holder.tvMatched.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Utils.Toast(context, "hello world");
 
             }
         });

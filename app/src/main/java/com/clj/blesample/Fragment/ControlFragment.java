@@ -17,8 +17,6 @@ import android.widget.ImageView;
 import com.clj.blesample.R;
 import com.clj.blesample.View.LeftBoard;
 import com.clj.blesample.View.PaintBoard;
-import com.clj.blesample.comm.Utils;
-
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -113,7 +111,7 @@ public class ControlFragment extends Fragment implements View.OnClickListener, V
         switch (view.getId()) {
             case R.id.btn_left_up:
 
-                Utils.Toast(getContext(), "hello");
+
                 break;
             case R.id.btn_left_down:
 
