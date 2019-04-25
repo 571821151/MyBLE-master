@@ -16,7 +16,6 @@ import android.util.Log;
 import android.view.View;
 
 import com.clj.blesample.R;
-import com.clj.blesample.comm.Utils;
 
 public class PaintBoard extends View {
     private final String TAG = PaintBoard.class.getName();

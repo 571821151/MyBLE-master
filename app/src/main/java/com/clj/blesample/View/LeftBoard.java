@@ -16,7 +16,6 @@ import android.util.Log;
 import android.view.View;
 
 import com.clj.blesample.R;
-import com.clj.blesample.comm.Utils;
 
 public class LeftBoard extends View {
     private float progress;
