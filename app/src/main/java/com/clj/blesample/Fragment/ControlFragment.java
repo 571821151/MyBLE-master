@@ -65,6 +65,12 @@ public class ControlFragment extends Fragment implements View.OnClickListener, V
         return v;
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        handler.removeCallbacksAndMessages(null);
+    }
+
     private void prepareResource() {
         bitmap_left = ((BitmapDrawable) (getResources()
                 .getDrawable(R.mipmap.logo2)))
@@ -164,6 +170,7 @@ public class ControlFragment extends Fragment implements View.OnClickListener, V
         }
     }
 
+
     private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -176,12 +183,12 @@ public class ControlFragment extends Fragment implements View.OnClickListener, V
                     setDegreeForLeft(false);
                     break;
                 case R.id.btn_mid_up:
-                    height_mid += 4;
-                    setMidPosition();
+//                    height_mid += 4;
+//                    setMidPosition();
                     break;
                 case R.id.btn_mid_down:
-                    height_mid -= 4;
-                    setMidPosition();
+//                    height_mid -= 4;
+//                    setMidPosition();
                     break;
                 case R.id.btn_right_up:
                     setDegreeForRight(true);

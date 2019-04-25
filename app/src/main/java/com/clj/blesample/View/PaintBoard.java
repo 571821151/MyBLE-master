@@ -19,6 +19,7 @@ import com.clj.blesample.R;
 import com.clj.blesample.comm.Utils;
 
 public class PaintBoard extends View {
+    private final String TAG = PaintBoard.class.getName();
 
     private float degree;
     private Bitmap bitmap_right;
@@ -35,21 +36,18 @@ public class PaintBoard extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-
-        Log.d("cly", "onDraw: " + degree);
+        Log.d(TAG, "onDraw: " + degree);
         //最大变换范围
-
-
-        matrix.postRotate(degree, 0, bitmap_right.getHeight());//顺时针旋转45度
+        matrix.setRotate(degree, 0, bitmap_right.getHeight() / 2);//顺时针旋转45度
 
         canvas.drawBitmap(bitmap_right, matrix, null);
-//        double rect_angle = -degree / 180 * Math.PI;
-//
-//        Paint mPaint = new Paint();
-//        int width = bitmap_right.getWidth();
-//        float x_position = (float) Math.cos(rect_angle) * width;
-//        float y_position = (float) Math.sin(rect_angle) * width;
-//        canvas.drawBitmap(bitmap_right, x_position, y_position, mPaint);
+        double rect_angle = -degree / 180 * Math.PI;
+
+        Paint mPaint = new Paint();
+        int width = bitmap_right.getWidth();
+        float x_position = (float) Math.cos(rect_angle) * width;
+        float y_position = (float) Math.sin(rect_angle) * width;
+        canvas.drawBitmap(bitmap_right, x_position, y_position, mPaint);
     }
 
     public void SetDegree(float degree) {

@@ -37,7 +37,6 @@ import android.widget.Toast;
 import com.clj.blesample.DB.ConfigBean;
 import com.clj.blesample.adapter.DeviceAdapter;
 import com.clj.blesample.comm.ObserverManager;
-import com.clj.blesample.comm.Utils;
 import com.clj.blesample.operation.OperateActivity;
 import com.clj.blesample.operation.OperationActivity;
 import com.clj.fastble.BleManager;
@@ -50,14 +49,13 @@ import com.clj.fastble.exception.BleException;
 import com.clj.fastble.scan.BleScanRuleConfig;
 
 import org.litepal.crud.DataSupport;
-import org.litepal.tablemanager.Connector;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends BaseActivity implements View.OnClickListener {
 
     private static final String TAG = MainActivity.class.getSimpleName();
     private static final int REQUEST_CODE_OPEN_GPS = 1;

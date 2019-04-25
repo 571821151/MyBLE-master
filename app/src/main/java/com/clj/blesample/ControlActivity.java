@@ -14,15 +14,23 @@ import android.widget.Button;
 import com.clj.blesample.Fragment.ControlFragment;
 import com.clj.blesample.Fragment.SetPositionFragment;
 import com.clj.blesample.Fragment.SettingFragment;
+import com.clj.fastble.data.BleDevice;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ControlActivity extends AppCompatActivity implements View.OnClickListener {
+    private static final String TAG = ControlActivity.class.getSimpleName();
+
+    public static final String KEY_DATA = "key_data";
+
+    private BleDevice bleDevice;
+
     private List<Fragment> fragments = new ArrayList<>();
     private int currentPage = 0;
     private Button btn_left;
     private Button btn_right;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,11 +44,11 @@ public class ControlActivity extends AppCompatActivity implements View.OnClickLi
     }
 
 
-
     private void initPage() {
 
         prepareFragment();
         changePage(0);
+        bleDevice = getIntent().getParcelableExtra(KEY_DATA);
     }
 
     public void changePage(int page) {
@@ -98,7 +106,6 @@ public class ControlActivity extends AppCompatActivity implements View.OnClickLi
             case 0:
                 btn_left.setBackgroundResource(R.mipmap.btn_left);
                 btn_right.setBackgroundResource(R.mipmap.btn_right);
-
                 break;
             case 1:
                 btn_left.setBackgroundResource(R.mipmap.control);
