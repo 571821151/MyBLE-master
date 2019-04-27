@@ -15,18 +15,16 @@ import android.view.View;
 
 import com.clj.blesample.R;
 
-public class LeftBoard extends View {
+public class MidBoard extends View {
     private float progress;
     private Matrix matrix;
 
     private Bitmap bitmap_left;
 
-    public LeftBoard(Context context, AttributeSet attrs) {
+    public MidBoard(Context context, AttributeSet attrs) {
 
         super(context, attrs);
-//        BitmapFactory.Options bfoOptions = new BitmapFactory.Options();
-//        bfoOptions.inScaled = false;
-        bitmap_left = BitmapFactory.decodeResource(getResources(), R.mipmap.log1);
+        bitmap_left = BitmapFactory.decodeResource(getResources(), R.mipmap.logo2);
 
         progress = 0;
     }
@@ -36,21 +34,21 @@ public class LeftBoard extends View {
         super.onDraw(canvas);
 
         // Utils.Toast(getContext(), "degree" + progress);
-        Log.d("cly", "onDraw: " + progress +"left bar getWidth"+bitmap_left.getWidth()+":"+bitmap_left.getHeight());
+      //  Log.d("cly", "onDraw: " + progress +"left bar getWidth"+bitmap_left.getWidth()+":"+bitmap_left.getHeight());
         //最大变换范围
         matrix = new Matrix();
-        matrix.setRotate(progress, bitmap_left.getWidth(), bitmap_left.getHeight());
+     //   matrix.setRotate(progress, bitmap_left.getWidth(), bitmap_left.getHeight());
 //        Log.d("cly", "" + progress);
 //        temp_bitmap = Bitmap.createBitmap(bitmap_left);
 
-        matrix.postTranslate((getWidth()-bitmap_left.getWidth())/2+5, getHeight()/2);
+       matrix.postTranslate((getWidth()-bitmap_left.getWidth())/2, getHeight()/2);
 
         canvas.drawBitmap(bitmap_left, matrix, null);
     }
 
-    public void SetDegree(int degree) {
-        this.progress = degree;
-        invalidate();
-
-    }
+//    public void SetDegree(int degree) {
+//        this.progress = degree;
+//        invalidate();
+//
+//    }
 }

@@ -41,5 +41,8 @@
     <string name="controlCenter">控 制 中 心</string>
     <string name="selectDevice">设 备 选 择</string>
     <string name="matchedEquipment">搜索到的设备</string>
+    <string name="searchDevice">搜索设备</string>
+    <string name="linkDevice">连接设备</string>
+
 
 </resources>

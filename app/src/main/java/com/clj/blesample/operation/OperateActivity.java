@@ -36,8 +36,6 @@ import android.widget.Toast;
 import com.clj.blesample.ControlActivity;
 import com.clj.blesample.MainActivity;
 import com.clj.blesample.R;
-import com.clj.blesample.adapter.MatchedAdapter;
-import com.clj.blesample.comm.Observer;
 import com.clj.blesample.comm.ObserverManager;
 import com.clj.fastble.BleManager;
 import com.clj.fastble.callback.BleGattCallback;
@@ -50,7 +48,6 @@ import com.clj.fastble.scan.BleScanRuleConfig;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 public class OperateActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -90,7 +87,7 @@ public class OperateActivity extends AppCompatActivity implements View.OnClickLi
     //初始化View
     private void initView() {
 
-
+        cur_pos=0;
         matchedAdapter = new SimpleDeviceAdapter(this);
         listView_device = findViewById(R.id.mainList);
         listView_device.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -347,9 +344,17 @@ public class OperateActivity extends AppCompatActivity implements View.OnClickLi
 
     private void checkPermissions() {
         BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-        if (!bluetoothAdapter.isEnabled()) {
+        try {
+            if (!bluetoothAdapter.isEnabled()) {
+                Toast.makeText(this, getString(R.string.please_open_blue), Toast.LENGTH_LONG).show();
+                return;
+            }
+        }
+        catch   (Exception e)
+        {
             Toast.makeText(this, getString(R.string.please_open_blue), Toast.LENGTH_LONG).show();
             return;
+
         }
 
         String[] permissions = {Manifest.permission.ACCESS_FINE_LOCATION};
@@ -502,7 +507,6 @@ public class OperateActivity extends AppCompatActivity implements View.OnClickLi
                 boolean isConnected = BleManager.getInstance().isConnected(bleDevice);
                 String name = bleDevice.getName();
                 holder.txt_name.setText(name);
-
                 if (isConnected) {
                     holder.txt_name.setTextColor(0xFF1DE9B6);
                 } else {
@@ -511,7 +515,7 @@ public class OperateActivity extends AppCompatActivity implements View.OnClickLi
                 }
             }
             if (position == cur_pos) {// 如果当前的行就是ListView中选中的一行，就更改显示样式
-                convertView.setBackgroundColor(getResources().getColor(R.color.lineColor));// 更改整行的背景色
+                convertView.setBackgroundColor(getResources().getColor(R.color.colorPrimary));// 更改整行的背景色
                 device = bleDevice;
             }
             return convertView;

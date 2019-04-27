@@ -40,5 +40,8 @@
     <string name="blueToothConnected">Bluetooth Connected</string>
     <string name="controlCenter">CONTROL CENTER</string>
     <string name="selectDevice">SELECT DEVICE</string>
-    <string name="matchedEquipment">Matched Equipment</string>
+    <string name="matchedEquipment">Searched Equipment</string>
+    <string name="searchDevice">SEARCH DEVICE</string>
+    <string name="linkDevice">LINK DEVICE</string>
+
 </resources>

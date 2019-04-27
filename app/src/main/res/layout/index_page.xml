@@ -44,8 +44,10 @@
             <ListView
                 android:id="@+id/mainList"
                 android:layout_width="match_parent"
+                android:minHeight="120dp"
                 android:layout_height="0dp"
                 android:layout_weight="1"
+                android:adjustViewBounds="true"
                 android:choiceMode="singleChoice"
                 android:scrollbars="none">
 
@@ -63,16 +65,29 @@
                     android:layout_width="197.5dp"
                     android:layout_height="32.5dp"
                     android:layout_gravity="center"
-
+                    android:textColor="#ffffffff"
+                    android:textSize="15sp"
+                    android:shadowDx="-1"
+                    android:shadowDy="-1"
+                    android:shadowRadius="3.0"
+                    android:shadowColor="#bfc6c6c6"
                     android:layout_marginBottom="21dp"
-                    android:background="@mipmap/button_sd" />
+                    android:text="@string/searchDevice"
+                    android:background="@mipmap/brown_button" />
 
                 <Button
                     android:id="@+id/btn_connect_xy"
                     android:layout_width="197.5dp"
+                    android:text="@string/linkDevice"
+                    android:textColor="#ffffffff"
+                    android:textSize="15sp"
+                    android:shadowDx="-1"
+                    android:shadowDy="-1"
+                    android:shadowRadius="3.0"
+                    android:shadowColor="#bfc6c6c6"
                     android:layout_height="32.5dp"
                     android:layout_gravity="center"
-                    android:background="@mipmap/button_ld" />
+                    android:background="@mipmap/brown_button" />
             </LinearLayout>
         </LinearLayout>
     </FrameLayout>

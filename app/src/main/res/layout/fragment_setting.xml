@@ -105,7 +105,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
-                        android:background="@mipmap/icon_p2"
+                        android:background="@mipmap/icon_p2_w"
                         android:gravity="center_horizontal" />
 
                     <TextView
@@ -148,7 +148,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
-                        android:background="@mipmap/icon_p3"
+                        android:background="@mipmap/icon_p3_w"
                         android:gravity="center_horizontal" />
 
                     <TextView
@@ -183,7 +183,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
-                        android:background="@mipmap/icon_flat"
+                        android:background="@mipmap/icon_flat_w"
                         android:gravity="center_horizontal" />
 
                     <TextView

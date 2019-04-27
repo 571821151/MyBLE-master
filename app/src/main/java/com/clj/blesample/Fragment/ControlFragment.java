@@ -1,8 +1,5 @@
 package com.clj.blesample.Fragment;
 
-import android.graphics.Bitmap;
-import android.graphics.Matrix;
-import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -12,11 +9,11 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
 
 import com.clj.blesample.R;
 import com.clj.blesample.View.LeftBoard;
-import com.clj.blesample.View.PaintBoard;
+import com.clj.blesample.View.RightBoard;
+
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -42,11 +39,7 @@ public class ControlFragment extends Fragment implements View.OnClickListener, V
 
 
     private LeftBoard bar_left;
-    private PaintBoard bar_right;
-    private ImageView bar_mid;
-
-    private Bitmap bitmap_left;
-    private Matrix matrix = new Matrix();
+    private RightBoard bar_right;
     private ScheduledExecutorService scheduledExecutor;
 
     @Override
@@ -59,7 +52,6 @@ public class ControlFragment extends Fragment implements View.OnClickListener, V
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_control, null);
         initView(v);
-        prepareResource();
         return v;
     }
 
@@ -69,16 +61,11 @@ public class ControlFragment extends Fragment implements View.OnClickListener, V
         handler.removeCallbacksAndMessages(null);
     }
 
-    private void prepareResource() {
-        bitmap_left = ((BitmapDrawable) (getResources()
-                .getDrawable(R.mipmap.logo2)))
-                .getBitmap();
-    }
 
     private View initView(View v) {
         bar_left = (getActivity()).findViewById(R.id.image_main);
         bar_right = (getActivity()).findViewById(R.id.img_right);
-        bar_mid = (getActivity()).findViewById(R.id.image_mid);
+        //   bar_mid = (getActivity()).findViewById(R.id.image_mid);
 
         //left
         btn_left_up = v.findViewById(R.id.btn_left_up);
@@ -100,6 +87,32 @@ public class ControlFragment extends Fragment implements View.OnClickListener, V
 
         btn_right_down = v.findViewById(R.id.btn_right_down);
         btn_right_down.setOnTouchListener(this);
+
+
+//        Matrix matrix = new Matrix();
+//        matrix.setTranslate(0, 0);
+//
+//
+//
+//        Bitmap  photo = BitmapFactory.decodeResource(getResources(), R.mipmap.logo2);
+//        int width = photo.getWidth();
+//        int height = photo.getHeight();
+//        //建立一个空的Bitmap
+//        Bitmap icon = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+//        // 初始化画布绘制的图像到icon上
+//        Canvas canvas = new Canvas(icon);
+//        // 建立画笔
+//        Paint photoPaint = new Paint();
+//        // 获取更清晰的图像采样，防抖动
+//        photoPaint.setDither(true);
+//        // 过滤一下，抗剧齿
+//        photoPaint.setFilterBitmap(true);
+//
+//
+//        canvas.drawBitmap(photo, matrix, null);
+//        canvas.save(Canvas.ALL_SAVE_FLAG);
+//        canvas.restore();
+//        bar_mid.draw(canvas);
 
 
         return v;
@@ -181,12 +194,11 @@ public class ControlFragment extends Fragment implements View.OnClickListener, V
                     setDegreeForLeft(false);
                     break;
                 case R.id.btn_mid_up:
-//                    height_mid += 4;
-//                    setMidPosition();
+                    setDegreeForMid(true);
                     break;
                 case R.id.btn_mid_down:
-//                    height_mid -= 4;
-//                    setMidPosition();
+
+                    setDegreeForMid(false);
                     break;
                 case R.id.btn_right_up:
                     setDegreeForRight(true);
@@ -211,6 +223,27 @@ public class ControlFragment extends Fragment implements View.OnClickListener, V
             bar_left.SetDegree(degree_left);
         }
 
+        private void setDegreeForMid(boolean is_up) {
+
+            if (is_up) {
+                degree_left += 4;
+                degree_right -= 4;
+            } else {
+                degree_left -= 4;
+                degree_right += 4;
+            }
+            if (degree_left > 60)
+                degree_left = 60;
+            if (degree_left < 0)
+                degree_left = 0;
+            if (degree_right > 0)
+                degree_right = 0;
+            if (degree_right < -60)
+                degree_right = -60;
+            bar_left.SetDegree(degree_left);
+            bar_right.SetDegree(degree_right);
+        }
+
         private void setDegreeForRight(boolean is_up) {
 
             if (is_up)
@@ -224,13 +257,6 @@ public class ControlFragment extends Fragment implements View.OnClickListener, V
             bar_right.SetDegree(degree_right);
         }
     };
-
-    //设置中间条高度
-    private void setMidPosition() {
-        if (height_mid < 0)
-            return;
-        bar_mid.setPadding(0, 0, 0, height_mid);
-    }
 
 
 }
