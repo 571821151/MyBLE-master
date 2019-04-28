@@ -4,10 +4,13 @@
 
 package com.clj.blesample;
 
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -108,20 +111,19 @@ public class ControlActivity extends AppCompatActivity implements View.OnClickLi
     }
 
     private void changeBtnImage() {
+        Log.d(TAG, "changeBtnImage: " + currentPage);
         switch (currentPage) {
             case 0:
                 btn_left.setBackgroundResource(R.mipmap.brown_back);
                 btn_right.setBackgroundResource(R.mipmap.white_back);
-
-                imageView_left.setBackgroundResource(R.mipmap.control_w);
-                imageView_right.setBackgroundResource(R.mipmap.mode_g);
+                imageView_left.setImageResource(R.mipmap.control_w);
+                imageView_right.setImageResource(R.mipmap.mode_g);
                 break;
             case 1:
                 btn_left.setBackgroundResource(R.mipmap.white_back);
-
-                imageView_left.setBackgroundResource(R.mipmap.control);
-                imageView_right.setBackgroundResource(R.mipmap.mode);
                 btn_right.setBackgroundResource(R.mipmap.brown_back);
+                imageView_left.setImageResource(R.mipmap.control);
+                imageView_right.setImageResource(R.mipmap.mode);
                 break;
 
         }
