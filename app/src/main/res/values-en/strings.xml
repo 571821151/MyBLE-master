@@ -43,5 +43,7 @@
     <string name="matchedEquipment">Searched Equipment</string>
     <string name="searchDevice">SEARCH DEVICE</string>
     <string name="linkDevice">LINK DEVICE</string>
+    <string name="control_left">CONTROL</string>
+    <string name="control_right">MODE</string>
 
 </resources>

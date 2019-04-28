@@ -43,5 +43,7 @@
     <string name="matchedEquipment">搜索到的设备</string>
     <string name="searchDevice">搜索设备</string>
     <string name="linkDevice">连接设备</string>
+    <string name="control_left">控制</string>
+    <string name="control_right">模式</string>
 
 </resources>

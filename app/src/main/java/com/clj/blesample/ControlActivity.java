@@ -9,7 +9,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import com.clj.blesample.Fragment.ControlFragment;
 import com.clj.blesample.Fragment.SetPositionFragment;
@@ -28,8 +29,10 @@ public class ControlActivity extends AppCompatActivity implements View.OnClickLi
 
     private List<Fragment> fragments = new ArrayList<>();
     private int currentPage = 0;
-    private Button btn_left;
-    private Button btn_right;
+    private LinearLayout btn_left;
+    private LinearLayout btn_right;
+    private ImageView imageView_left;
+    private ImageView imageView_right;
 
 
     @Override
@@ -41,6 +44,9 @@ public class ControlActivity extends AppCompatActivity implements View.OnClickLi
         btn_left.setOnClickListener(this);
         btn_right = findViewById(R.id.btn_control_right);
         btn_right.setOnClickListener(this);
+        imageView_left = findViewById(R.id.view_left);
+        imageView_right = findViewById(R.id.view_right);
+
     }
 
 
@@ -104,12 +110,15 @@ public class ControlActivity extends AppCompatActivity implements View.OnClickLi
     private void changeBtnImage() {
         switch (currentPage) {
             case 0:
-                btn_left.setBackgroundResource(R.mipmap.btn_left);
-                btn_right.setBackgroundResource(R.mipmap.btn_right);
+                btn_left.setBackgroundResource(R.mipmap.brown_back);
+                btn_right.setBackgroundResource(R.mipmap.white_back);
                 break;
             case 1:
-                btn_left.setBackgroundResource(R.mipmap.control);
-                btn_right.setBackgroundResource(R.mipmap.mode);
+                btn_left.setBackgroundResource(R.mipmap.white_back);
+
+                imageView_left.setBackgroundResource(R.mipmap.control);
+                imageView_right.setBackgroundResource(R.mipmap.mode);
+                btn_right.setBackgroundResource(R.mipmap.brown_back);
                 break;
 
         }
