@@ -112,6 +112,9 @@ public class ControlActivity extends AppCompatActivity implements View.OnClickLi
             case 0:
                 btn_left.setBackgroundResource(R.mipmap.brown_back);
                 btn_right.setBackgroundResource(R.mipmap.white_back);
+
+                imageView_left.setBackgroundResource(R.mipmap.control_w);
+                imageView_right.setBackgroundResource(R.mipmap.mode_g);
                 break;
             case 1:
                 btn_left.setBackgroundResource(R.mipmap.white_back);
