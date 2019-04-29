@@ -194,7 +194,7 @@
 
                         android:textColor="#ff595959"
                         android:textSize="15sp"
-                        android:text="P4"/>
+                        android:text="@string/flat"/>
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>

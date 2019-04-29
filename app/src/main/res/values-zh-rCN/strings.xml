@@ -45,5 +45,7 @@
     <string name="linkDevice">连接设备</string>
     <string name="control_left">控制</string>
     <string name="control_right">模式</string>
+    <string name="ok">确定</string>
+    <string name="flat">平躺</string>
 
 </resources>

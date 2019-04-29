@@ -12,12 +12,7 @@
         android:background="@color/backOfMain"
         android:orientation="vertical">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="20dp"
-            android:background="@color/black">
 
-        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -26,6 +21,7 @@
 
 
             <TextView
+                android:id="@+id/tv_back"
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
                 android:background="@color/backOfMain"
@@ -41,7 +37,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:layout_marginLeft="40dp"
             android:layout_marginRight="40dp"
             android:layout_weight="1"
@@ -81,7 +77,8 @@
 
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="30dp"
+            android:layout_height="20dp"
+            android:layout_marginBottom="40dp"
             android:layout_gravity="center"
             android:drawableStart="@mipmap/bluetooth"
             android:drawableLeft="@mipmap/bluetooth"
@@ -117,7 +114,7 @@
             android:layout_height="match_parent"
             android:layout_gravity="bottom|right"
             android:layout_weight="1"
-            android:background="@mipmap/white_back"
+            android:background="@mipmap/brown_back"
             android:orientation="vertical">
 
             <LinearLayout
@@ -131,16 +128,15 @@
                     android:layout_width="30dp"
                     android:layout_gravity="bottom"
                     android:layout_height="30dp"
-                    android:src="@mipmap/control" />
+                    android:src="@mipmap/control_w" />
             </LinearLayout>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_gravity="top|center"
-                android:paddingTop="9dp"
                 android:layout_weight="33.5"
-                android:gravity="top|center"
+                android:gravity="center_vertical|center"
                 android:text="@string/control_left"
                 android:textColor="#ffc0c0c0"
                 android:textSize="13sp" />
@@ -152,7 +148,7 @@
             android:layout_height="match_parent"
             android:layout_gravity="bottom|right"
             android:layout_weight="1"
-            android:background="@mipmap/brown_back"
+            android:background="@mipmap/white_back"
             android:orientation="vertical">
 
             <LinearLayout
@@ -165,15 +161,14 @@
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_gravity="bottom"
-                android:src="@mipmap/mode" />
+                android:src="@mipmap/mode_g" />
             </LinearLayout>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_gravity="center_horizontal"
-                android:paddingTop="9dp"
                 android:layout_weight="33.5"
-                android:gravity="top|center"
+                android:gravity="center_vertical|center"
                 android:text="@string/control_right"
                 android:textColor="#ffc0c0c0"
                 android:textSize="13sp" />

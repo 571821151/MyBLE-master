@@ -33,18 +33,20 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical">
 
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="@string/matchedEquipment" />
+                android:layout_height="14dp"
+                android:text="@string/matchedEquipment"
+                android:textColor="#ff939393"
+                android:textSize="11sp" />
 
             <ListView
                 android:id="@+id/mainList"
                 android:layout_width="match_parent"
-                android:minHeight="120dp"
+                android:minHeight="150dp"
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 android:adjustViewBounds="true"
@@ -55,7 +57,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="110dp"
                 android:layout_gravity="bottom"
                 android:orientation="vertical"
                 android:paddingTop="20dp">
@@ -65,29 +67,29 @@
                     android:layout_width="197.5dp"
                     android:layout_height="32.5dp"
                     android:layout_gravity="center"
-                    android:textColor="#ffffffff"
-                    android:textSize="15sp"
+                    android:layout_marginBottom="21dp"
+                    android:background="@mipmap/brown_button"
+                    android:shadowColor="#bfc6c6c6"
                     android:shadowDx="-1"
                     android:shadowDy="-1"
                     android:shadowRadius="3.0"
-                    android:shadowColor="#bfc6c6c6"
-                    android:layout_marginBottom="21dp"
                     android:text="@string/searchDevice"
-                    android:background="@mipmap/brown_button" />
+                    android:textColor="#ffffffff"
+                    android:textSize="15sp" />
 
                 <Button
                     android:id="@+id/btn_connect_xy"
                     android:layout_width="197.5dp"
-                    android:text="@string/linkDevice"
-                    android:textColor="#ffffffff"
-                    android:textSize="15sp"
+                    android:layout_height="32.5dp"
+                    android:layout_gravity="center"
+                    android:background="@mipmap/brown_button"
+                    android:shadowColor="#bfc6c6c6"
                     android:shadowDx="-1"
                     android:shadowDy="-1"
                     android:shadowRadius="3.0"
-                    android:shadowColor="#bfc6c6c6"
-                    android:layout_height="32.5dp"
-                    android:layout_gravity="center"
-                    android:background="@mipmap/brown_button" />
+                    android:text="@string/linkDevice"
+                    android:textColor="#ffffffff"
+                    android:textSize="15sp" />
             </LinearLayout>
         </LinearLayout>
     </FrameLayout>

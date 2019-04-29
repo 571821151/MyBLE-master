@@ -44,7 +44,7 @@ public class RightBoard extends View {
         matrix = new Matrix();
         matrix.setRotate(degree, 0, bitmap_right_1.getHeight());//顺时针旋转45度
        //
-        matrix.postTranslate(10, getHeight()/2);
+        matrix.postTranslate(15, getHeight()/2);
         canvas.drawBitmap(bitmap_right_1, matrix, null);
         double rect_angle = -degree / 180 * Math.PI;
 
@@ -52,7 +52,7 @@ public class RightBoard extends View {
         float x_position = (float) Math.cos(rect_angle) * width;
         float y_position = (float) Math.sin(rect_angle) * width;
 //        Toast.makeText(getContext(), "" + y_position + "x" + x_position, Toast.LENGTH_SHORT).show();
-        canvas.drawBitmap(bitmap_right_2,10+ x_position,getHeight()/2 -y_position, null);
+        canvas.drawBitmap(bitmap_right_2,15+ x_position,getHeight()/2 -y_position, null);
     }
 
     public void SetDegree(float degree) {

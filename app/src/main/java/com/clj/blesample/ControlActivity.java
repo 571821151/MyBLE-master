@@ -4,6 +4,7 @@
 
 package com.clj.blesample;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
@@ -14,6 +15,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.clj.blesample.Fragment.ControlFragment;
 import com.clj.blesample.Fragment.SetPositionFragment;
@@ -36,6 +38,7 @@ public class ControlActivity extends AppCompatActivity implements View.OnClickLi
     private LinearLayout btn_right;
     private ImageView imageView_left;
     private ImageView imageView_right;
+    private TextView tv_back;
 
 
     @Override
@@ -49,7 +52,8 @@ public class ControlActivity extends AppCompatActivity implements View.OnClickLi
         btn_right.setOnClickListener(this);
         imageView_left = findViewById(R.id.view_left);
         imageView_right = findViewById(R.id.view_right);
-
+        tv_back = findViewById(R.id.tv_back);
+        tv_back.setOnClickListener(this);
     }
 
 
@@ -106,6 +110,22 @@ public class ControlActivity extends AppCompatActivity implements View.OnClickLi
             case R.id.btn_control_right:
                 changePage(1);
                 changeBtnImage();
+                break;
+            case R.id.tv_back:
+
+                Intent intent = new Intent();
+
+                //把返回数据存入Intent
+
+                intent.putExtra("result", "My name is linjiqin");
+
+                //设置返回数据
+
+                this.setResult(RESULT_OK, intent);
+
+                //关闭Activity
+
+                this.finish();
                 break;
         }
     }

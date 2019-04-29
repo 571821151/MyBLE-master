@@ -43,7 +43,7 @@ public class LeftBoard extends View {
 //        Log.d("cly", "" + progress);
 //        temp_bitmap = Bitmap.createBitmap(bitmap_left);
 
-        matrix.postTranslate((getWidth()-bitmap_left.getWidth())/2+5, getHeight()/2);
+        matrix.postTranslate(15+(getWidth()-bitmap_left.getWidth())/2, getHeight()/2);
 
         canvas.drawBitmap(bitmap_left, matrix, null);
     }

@@ -87,13 +87,15 @@ public class OperateActivity extends AppCompatActivity implements View.OnClickLi
     //初始化View
     private void initView() {
 
-        cur_pos=0;
+        cur_pos = 0;
         matchedAdapter = new SimpleDeviceAdapter(this);
         listView_device = findViewById(R.id.mainList);
         listView_device.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                 cur_pos = position;// 更新当前行
+                matchedAdapter.notifyDataSetChanged();
+
             }
         });
         btn_link = findViewById(R.id.btn_connect_xy);
@@ -349,9 +351,7 @@ public class OperateActivity extends AppCompatActivity implements View.OnClickLi
                 Toast.makeText(this, getString(R.string.please_open_blue), Toast.LENGTH_LONG).show();
                 return;
             }
-        }
-        catch   (Exception e)
-        {
+        } catch (Exception e) {
             Toast.makeText(this, getString(R.string.please_open_blue), Toast.LENGTH_LONG).show();
             return;
 
@@ -515,8 +515,12 @@ public class OperateActivity extends AppCompatActivity implements View.OnClickLi
                 }
             }
             if (position == cur_pos) {// 如果当前的行就是ListView中选中的一行，就更改显示样式
-                convertView.setBackgroundColor(getResources().getColor(R.color.colorPrimary));// 更改整行的背景色
+                convertView.setBackgroundColor(getResources().getColor(R.color.adapter_back));// 更改整行的背景色
                 device = bleDevice;
+            }
+            else
+            {
+                convertView.setBackgroundColor(getResources().getColor(R.color.white));// 更改整行的背景色
             }
             return convertView;
         }

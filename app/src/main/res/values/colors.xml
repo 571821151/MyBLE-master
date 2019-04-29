@@ -19,4 +19,5 @@
     <drawable name="red">#ffff0000</drawable>
     <drawable name="transparent">#00000000</drawable>
     <drawable name="line_color">#E5E5E5</drawable>
+    <color name="adapter_back">#c5c9ca</color>
 </resources>

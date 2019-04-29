@@ -191,7 +191,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 }
             }
         });
-        ListView listView_device = (ListView) findViewById(R.id.list_device);
+        ListView listView_device =  findViewById(R.id.list_device);
         listView_device.setAdapter(mDeviceAdapter);
 
     }
