@@ -16,7 +16,7 @@ public class ObserverManager implements Observable {
         private static final ObserverManager sObserverManager = new ObserverManager();
     }
 
-    private List<Observer> observers = new ArrayList<>();
+    private List<Observer> observers = new ArrayList<>(2);
 
     @Override
     public void addObserver(Observer obj) {

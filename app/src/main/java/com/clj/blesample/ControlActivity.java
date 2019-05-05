@@ -4,6 +4,8 @@
 
 package com.clj.blesample;
 
+import android.bluetooth.BluetoothGatt;
+import android.bluetooth.BluetoothGattService;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
@@ -20,12 +22,16 @@ import android.widget.TextView;
 import com.clj.blesample.Fragment.ControlFragment;
 import com.clj.blesample.Fragment.SetPositionFragment;
 import com.clj.blesample.Fragment.SettingFragment;
+import com.clj.blesample.comm.Observer;
+import com.clj.blesample.comm.ObserverManager;
+import com.clj.fastble.BleManager;
 import com.clj.fastble.data.BleDevice;
+import com.clj.fastble.utils.HexUtil;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ControlActivity extends AppCompatActivity implements View.OnClickListener {
+public class ControlActivity extends AppCompatActivity implements View.OnClickListener, Observer {
     private static final String TAG = ControlActivity.class.getSimpleName();
 
     public static final String KEY_DATA = "key_data";
@@ -54,6 +60,7 @@ public class ControlActivity extends AppCompatActivity implements View.OnClickLi
         imageView_right = findViewById(R.id.view_right);
         tv_back = findViewById(R.id.tv_back);
         tv_back.setOnClickListener(this);
+        ObserverManager.getInstance().addObserver(this);
     }
 
 
@@ -62,7 +69,20 @@ public class ControlActivity extends AppCompatActivity implements View.OnClickLi
         prepareFragment();
         changePage(0);
         bleDevice = getIntent().getParcelableExtra(KEY_DATA);
+        if (bleDevice != null) {
+            BluetoothGatt gatt = BleManager.getInstance().getBluetoothGatt(bleDevice);
+            for (BluetoothGattService service : gatt.getServices()) {
+                String uuid = service.getUuid().toString();
+            }
+            gatt.getServices();
+        }
+//            BleManager.getInstance().write(bleDevice,  service.getService().getUuid().toString(),
+//                    characteristic.getUuid().toString(),
+//                    HexUtil.hexStringToBytes(hex),);
+
     }
+
+}
 
     public void changePage(int page) {
         currentPage = page;
@@ -77,6 +97,12 @@ public class ControlActivity extends AppCompatActivity implements View.OnClickLi
         for (Fragment fragment : fragments) {
             getSupportFragmentManager().beginTransaction().add(R.id.fragment_main, fragment).hide(fragment).commit();
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        ObserverManager.getInstance().deleteObserver(this);
     }
 
     private void updateFragment(int position) {
@@ -147,5 +173,22 @@ public class ControlActivity extends AppCompatActivity implements View.OnClickLi
                 break;
 
         }
+    }
+
+    @Override
+    public void disConnected(BleDevice bleDevice) {
+        Intent intent = new Intent();
+
+        //把返回数据存入Intent
+
+        intent.putExtra("result", "My name is linjiqin");
+
+        //设置返回数据
+
+        this.setResult(RESULT_OK, intent);
+
+        //关闭Activity
+
+        this.finish();
     }
 }

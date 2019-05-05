@@ -36,6 +36,8 @@ import android.widget.Toast;
 import com.clj.blesample.ControlActivity;
 import com.clj.blesample.MainActivity;
 import com.clj.blesample.R;
+import com.clj.blesample.comm.Observable;
+import com.clj.blesample.comm.Observer;
 import com.clj.blesample.comm.ObserverManager;
 import com.clj.fastble.BleManager;
 import com.clj.fastble.callback.BleGattCallback;
@@ -49,7 +51,7 @@ import com.clj.fastble.scan.BleScanRuleConfig;
 import java.util.ArrayList;
 import java.util.List;
 
-public class OperateActivity extends AppCompatActivity implements View.OnClickListener {
+public class OperateActivity extends AppCompatActivity implements View.OnClickListener , Observer {
 
     //TAG and others
     private static final String TAG = MainActivity.class.getSimpleName();
@@ -81,6 +83,7 @@ public class OperateActivity extends AppCompatActivity implements View.OnClickLi
                 .setReConnectCount(1, 5000)
                 .setConnectOverTime(20000)
                 .setOperateTimeout(5000);
+        ObserverManager.getInstance().addObserver(this);
 
     }
 
@@ -121,6 +124,7 @@ public class OperateActivity extends AppCompatActivity implements View.OnClickLi
         super.onDestroy();
         BleManager.getInstance().disconnectAllDevice();
         BleManager.getInstance().destroy();
+        ObserverManager.getInstance().deleteObserver(this);
     }
 
     @Override
@@ -128,10 +132,10 @@ public class OperateActivity extends AppCompatActivity implements View.OnClickLi
         switch (view.getId()) {
             case R.id.btn_connect_xy:
                 Intent intent = new Intent(getApplicationContext(), ControlActivity.class);
-//                    intent.putExtra(OperationActivity.KEY_DATA, bleDevice);
+                /* intent.putExtra(OperationActivity.KEY_DATA, bleDevice); */
                 startActivity(intent);
                 if (device != null) {
-                    // connect(device);
+                     connect(device);
 
                 } else
                     Toast.makeText(OperateActivity.this, R.string.connect_fail, Toast.LENGTH_SHORT).show();
@@ -421,6 +425,11 @@ public class OperateActivity extends AppCompatActivity implements View.OnClickLi
                 startScan();
             }
         }
+    }
+
+    @Override
+    public void disConnected(BleDevice bleDevice) {
+        Toast.makeText(this, R.string.disconnected, Toast.LENGTH_SHORT).show();
     }
 
 
