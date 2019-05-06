@@ -6,14 +6,6 @@
         android:duration="500"
         android:fromAlpha="0.0"
         android:toAlpha="1.0" />
-    <rotate
-        android:fromDegrees="0"
-        android:pivotX="50%"
-        android:pivotY="50%"
-        android:toDegrees="60"
-        android:duration="500"
-        android:repeatCount="-1">
 
-    </rotate>
 </set>
 

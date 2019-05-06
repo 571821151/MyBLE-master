@@ -48,6 +48,7 @@ public class ControlActivity extends AppCompatActivity implements View.OnClickLi
     private ImageView imageView_left;
     private ImageView imageView_right;
     private TextView tv_back;
+    private LinearLayout layout_bottom;
 
 
     public static final int PROPERTY_READ = 1;
@@ -63,15 +64,17 @@ public class ControlActivity extends AppCompatActivity implements View.OnClickLi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_main);
-        initPage();
+
         btn_left = findViewById(R.id.btn_control_left);
         btn_left.setOnClickListener(this);
         btn_right = findViewById(R.id.btn_control_right);
         btn_right.setOnClickListener(this);
         imageView_left = findViewById(R.id.view_left);
         imageView_right = findViewById(R.id.view_right);
+        layout_bottom = findViewById(R.id.layout_bottom);
         tv_back = findViewById(R.id.tv_back);
         tv_back.setOnClickListener(this);
+        initPage();
         ObserverManager.getInstance().addObserver(this);
     }
 
@@ -83,6 +86,7 @@ public class ControlActivity extends AppCompatActivity implements View.OnClickLi
         bleDevice = getIntent().getParcelableExtra(KEY_DATA);
         if (bleDevice != null) {
             BluetoothGatt gatt = BleManager.getInstance().getBluetoothGatt(bleDevice);
+            if (gatt == null) return;
             for (BluetoothGattService service : gatt.getServices()) {
                 UUID uuid = service.getUuid();
 
@@ -104,33 +108,37 @@ public class ControlActivity extends AppCompatActivity implements View.OnClickLi
     }
 
     public void writeBleMessage(String hex) {
-        BleManager.getInstance().write(
-                bleDevice,
-                characteristicWrite.getService().getUuid().toString(),
-                characteristicWrite.getUuid().toString(),
-                HexUtil.hexStringToBytes(hex),
-                new BleWriteCallback() {
+        if (characteristicWrite == null)
+            return;
+        else {
+            BleManager.getInstance().write(
+                    bleDevice,
+                    characteristicWrite.getService().getUuid().toString(),
+                    characteristicWrite.getUuid().toString(),
+                    HexUtil.hexStringToBytes(hex),
+                    new BleWriteCallback() {
 
-                    @Override
-                    public void onWriteSuccess(final int current, final int total, final byte[] justWrite) {
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                Toast.makeText(ControlActivity.this, "" + HexUtil.formatHexString(justWrite, true), Toast.LENGTH_SHORT).show();
-                            }
-                        });
-                    }
+                        @Override
+                        public void onWriteSuccess(final int current, final int total, final byte[] justWrite) {
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Toast.makeText(ControlActivity.this, "" + HexUtil.formatHexString(justWrite, true), Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                        }
 
-                    @Override
-                    public void onWriteFailure(final BleException exception) {
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                Toast.makeText(ControlActivity.this, "" + "write failure", Toast.LENGTH_SHORT).show();
-                            }
-                        });
-                    }
-                });
+                        @Override
+                        public void onWriteFailure(final BleException exception) {
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Toast.makeText(ControlActivity.this, "" + "write failure", Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                        }
+                    });
+        }
     }
 
 
@@ -167,8 +175,11 @@ public class ControlActivity extends AppCompatActivity implements View.OnClickLi
             Fragment fragment = fragments.get(i);
             if (i == position) {
                 transaction.show(fragment);
+                if (i == 2)
+                    layout_bottom.setVisibility(View.INVISIBLE);
+                else
+                    layout_bottom.setVisibility(View.VISIBLE);
             } else {
-
                 transaction.hide(fragment);
             }
             transaction.commit();

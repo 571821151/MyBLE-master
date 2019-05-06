@@ -131,15 +131,15 @@ public class OperateActivity extends AppCompatActivity implements View.OnClickLi
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_connect_xy:
-                Intent intent = new Intent(getApplicationContext(), ControlActivity.class);
-                /* intent.putExtra(OperationActivity.KEY_DATA, bleDevice); */
-                startActivity(intent);
+
                 if (device != null) {
                      connect(device);
 
                 } else
                     Toast.makeText(OperateActivity.this, R.string.connect_fail, Toast.LENGTH_SHORT).show();
-
+                Intent intent = new Intent(getApplicationContext(), ControlActivity.class);
+                intent.putExtra(OperationActivity.KEY_DATA, device);
+                startActivity(intent);
                 break;
             case R.id.btn_search:
                 try {
