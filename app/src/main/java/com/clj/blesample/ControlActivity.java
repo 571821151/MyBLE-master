@@ -5,10 +5,9 @@
 package com.clj.blesample;
 
 import android.bluetooth.BluetoothGatt;
+import android.bluetooth.BluetoothGattCharacteristic;
 import android.bluetooth.BluetoothGattService;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -18,6 +17,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.clj.blesample.Fragment.ControlFragment;
 import com.clj.blesample.Fragment.SetPositionFragment;
@@ -25,11 +25,14 @@ import com.clj.blesample.Fragment.SettingFragment;
 import com.clj.blesample.comm.Observer;
 import com.clj.blesample.comm.ObserverManager;
 import com.clj.fastble.BleManager;
+import com.clj.fastble.callback.BleWriteCallback;
 import com.clj.fastble.data.BleDevice;
+import com.clj.fastble.exception.BleException;
 import com.clj.fastble.utils.HexUtil;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public class ControlActivity extends AppCompatActivity implements View.OnClickListener, Observer {
     private static final String TAG = ControlActivity.class.getSimpleName();
@@ -46,6 +49,15 @@ public class ControlActivity extends AppCompatActivity implements View.OnClickLi
     private ImageView imageView_right;
     private TextView tv_back;
 
+
+    public static final int PROPERTY_READ = 1;
+    public static final int PROPERTY_WRITE = 2;
+    public static final int PROPERTY_WRITE_NO_RESPONSE = 3;
+    public static final int PROPERTY_NOTIFY = 4;
+    public static final int PROPERTY_INDICATE = 5;
+
+
+    private BluetoothGattCharacteristic characteristicWrite;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,17 +84,55 @@ public class ControlActivity extends AppCompatActivity implements View.OnClickLi
         if (bleDevice != null) {
             BluetoothGatt gatt = BleManager.getInstance().getBluetoothGatt(bleDevice);
             for (BluetoothGattService service : gatt.getServices()) {
-                String uuid = service.getUuid().toString();
+                UUID uuid = service.getUuid();
+
+                int charaProp = service.getCharacteristic(uuid).getProperties();
+                switch (charaProp) {
+                    case PROPERTY_WRITE_NO_RESPONSE:
+                    case PROPERTY_WRITE:
+                        characteristicWrite = service.getCharacteristic(uuid);
+                        break;
+                    default:
+                        break;
+                }
+                break;
             }
-            gatt.getServices();
+
         }
-//            BleManager.getInstance().write(bleDevice,  service.getService().getUuid().toString(),
-//                    characteristic.getUuid().toString(),
-//                    HexUtil.hexStringToBytes(hex),);
+        writeBleMessage("0x10");
 
     }
 
-}
+    public void writeBleMessage(String hex) {
+        BleManager.getInstance().write(
+                bleDevice,
+                characteristicWrite.getService().getUuid().toString(),
+                characteristicWrite.getUuid().toString(),
+                HexUtil.hexStringToBytes(hex),
+                new BleWriteCallback() {
+
+                    @Override
+                    public void onWriteSuccess(final int current, final int total, final byte[] justWrite) {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(ControlActivity.this, "" + HexUtil.formatHexString(justWrite, true), Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }
+
+                    @Override
+                    public void onWriteFailure(final BleException exception) {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(ControlActivity.this, "" + "write failure", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }
+                });
+    }
+
 
     public void changePage(int page) {
         currentPage = page;
