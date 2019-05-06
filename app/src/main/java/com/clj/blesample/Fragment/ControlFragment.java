@@ -88,33 +88,6 @@ public class ControlFragment extends Fragment implements View.OnClickListener, V
         btn_right_down = v.findViewById(R.id.btn_right_down);
         btn_right_down.setOnTouchListener(this);
 
-
-//        Matrix matrix = new Matrix();
-//        matrix.setTranslate(0, 0);
-//
-//
-//
-//        Bitmap  photo = BitmapFactory.decodeResource(getResources(), R.mipmap.logo2);
-//        int width = photo.getWidth();
-//        int height = photo.getHeight();
-//        //建立一个空的Bitmap
-//        Bitmap icon = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
-//        // 初始化画布绘制的图像到icon上
-//        Canvas canvas = new Canvas(icon);
-//        // 建立画笔
-//        Paint photoPaint = new Paint();
-//        // 获取更清晰的图像采样，防抖动
-//        photoPaint.setDither(true);
-//        // 过滤一下，抗剧齿
-//        photoPaint.setFilterBitmap(true);
-//
-//
-//        canvas.drawBitmap(photo, matrix, null);
-//        canvas.save(Canvas.ALL_SAVE_FLAG);
-//        canvas.restore();
-//        bar_mid.draw(canvas);
-
-
         return v;
     }
 
