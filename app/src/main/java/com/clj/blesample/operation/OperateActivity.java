@@ -33,6 +33,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.clj.blesample.BaseActivity;
 import com.clj.blesample.ControlActivity;
 import com.clj.blesample.MainActivity;
 import com.clj.blesample.R;
@@ -51,7 +52,7 @@ import com.clj.fastble.scan.BleScanRuleConfig;
 import java.util.ArrayList;
 import java.util.List;
 
-public class OperateActivity extends AppCompatActivity implements View.OnClickListener, Observer {
+public class OperateActivity extends BaseActivity implements View.OnClickListener, Observer {
 
     //TAG and others
     private static final String TAG = MainActivity.class.getSimpleName();
