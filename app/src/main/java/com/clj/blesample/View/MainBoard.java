@@ -9,6 +9,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
+import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
@@ -16,48 +17,73 @@ import android.view.View;
 import com.clj.blesample.R;
 
 public class MainBoard extends View {
-    private float progress;
+    private float left_progress;
+    private float right_progress;
+
     private Matrix matrix;
 
     private Bitmap bitmap_left;
     private Bitmap bitmap_mid;
-    private Bitmap bitmap_right;
-    private Bitmap bitmap_last;
+    private Bitmap bitmap_right_1;
+    private Bitmap bitmap_right_2;
 
 
     public MainBoard(Context context, AttributeSet attrs) {
 
         super(context, attrs);
-//        BitmapFactory.Options bfoOptions = new BitmapFactory.Options();
-//        bfoOptions.inScaled = false;
         bitmap_left = BitmapFactory.decodeResource(getResources(), R.mipmap.log1);
         bitmap_mid = BitmapFactory.decodeResource(getResources(), R.mipmap.logo2);
-        bitmap_right = BitmapFactory.decodeResource(getResources(), R.mipmap.logo3);
-        bitmap_last = BitmapFactory.decodeResource(getResources(), R.mipmap.logo3);
+        bitmap_right_1 = BitmapFactory.decodeResource(getResources(), R.mipmap.log4);
+        bitmap_right_2 = BitmapFactory.decodeResource(getResources(), R.mipmap.logo4);
 
 
-        progress = 0;
+        left_progress = 0;
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
+        Paint paint = new Paint();
+        paint.setAntiAlias(true);
+        Integer height = getHeight() * 3 / 5;
 
-        // Utils.Toast(getContext(), "degree" + progress);
-        Log.d("cly", "onDraw: " + progress +"left bar getWidth"+bitmap_left.getWidth()+":"+bitmap_left.getHeight());
+        // Utils.Toast(getContext(), "degree" + left_progress);
+        Log.d("cly", "onDraw: " + left_progress + "left bar getWidth" + bitmap_left.getWidth() + ":" + bitmap_left.getHeight());
         //最大变换范围
+        //left image
         matrix = new Matrix();
-        matrix.setRotate(progress, bitmap_left.getWidth(), bitmap_left.getHeight());
-//        Log.d("cly", "" + progress);
-//        temp_bitmap = Bitmap.createBitmap(bitmap_left);
+        matrix.setRotate(left_progress, bitmap_left.getWidth(), bitmap_left.getHeight());
+        matrix.postTranslate(0, height);
+        canvas.drawBitmap(bitmap_left, matrix, paint);
 
-        matrix.postTranslate(15+(getWidth()-bitmap_left.getWidth())/2, getHeight()/2);
+        //mid image
+        matrix = new Matrix();
+        matrix.setTranslate(bitmap_left.getWidth(), height);
+        canvas.drawBitmap(bitmap_mid, matrix, paint);
 
-        canvas.drawBitmap(bitmap_left, matrix, null);
+        Integer left_width = bitmap_left.getWidth() + bitmap_mid.getWidth();
+        //right bar
+        matrix = new Matrix();
+        matrix.setRotate(right_progress, 0, bitmap_right_1.getHeight());
+
+        matrix.postTranslate(left_width, height);
+        canvas.drawBitmap(bitmap_right_1, matrix, null);
+        double rect_angle = -right_progress / 180 * Math.PI;
+
+        int width = bitmap_right_1.getWidth();
+        float x_position = (float) Math.cos(rect_angle) * width;
+        float y_position = (float) Math.sin(rect_angle) * width;
+        canvas.drawBitmap(bitmap_right_2, x_position + left_width, height - y_position, null);
     }
 
-    public void SetDegree(int degree) {
-        this.progress = degree;
+    public void SetLeftDegree(int degree) {
+        this.left_progress = degree;
+        invalidate();
+
+    }
+
+    public void SetRightDegree(int degree) {
+        this.right_progress = degree;
         invalidate();
 
     }

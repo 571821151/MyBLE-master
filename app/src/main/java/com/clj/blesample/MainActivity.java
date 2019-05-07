@@ -131,17 +131,17 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     private void initView() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        //生成数据库
-//        ConfigBean configBean = new ConfigBean();
-//        configBean.setmAge("25");
-//        configBean.setmName("sb");
-//        configBean.save();
-        try {
-            List<ConfigBean> list = DataSupport.findAll(ConfigBean.class);
-            Log.d("", list.get(0).getmName());
-        } catch (Exception e) {
-            Log.e(TAG, "initView: ", e);
-        }
+//       生成数据库
+//       ConfigBean configBean = new ConfigBean();
+//       configBean.setmAge("25");
+//       configBean.setmName("sb");
+//       configBean.save();
+//       try {
+//           List<ConfigBean> list = DataSupport.findAll(ConfigBean.class);
+//           Log.d("", list.get(0).getmName());
+//       } catch (Exception e) {
+//           Log.e(TAG, "initView: ", e);
+//       }
 
         btn_scan = (Button) findViewById(R.id.btn_scan);
         btn_scan.setText(getString(R.string.start_scan));
@@ -191,7 +191,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 }
             }
         });
-        ListView listView_device =  findViewById(R.id.list_device);
+        ListView listView_device = findViewById(R.id.list_device);
         listView_device.setAdapter(mDeviceAdapter);
 
     }

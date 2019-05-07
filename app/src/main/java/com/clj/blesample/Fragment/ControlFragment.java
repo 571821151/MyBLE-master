@@ -12,6 +12,7 @@ import android.widget.Button;
 
 import com.clj.blesample.R;
 import com.clj.blesample.View.LeftBoard;
+import com.clj.blesample.View.MainBoard;
 import com.clj.blesample.View.RightBoard;
 
 import java.util.concurrent.Executors;
@@ -24,7 +25,6 @@ public class ControlFragment extends Fragment implements View.OnClickListener, V
 
     private int degree_left = 0;
     private int degree_right = 0;
-    private int height_mid = 0;
 
 
     private Button btn_left_up;
@@ -40,6 +40,7 @@ public class ControlFragment extends Fragment implements View.OnClickListener, V
 
     private LeftBoard bar_left;
     private RightBoard bar_right;
+    private MainBoard main_board;
     private ScheduledExecutorService scheduledExecutor;
 
     @Override
@@ -65,7 +66,8 @@ public class ControlFragment extends Fragment implements View.OnClickListener, V
     private View initView(View v) {
         bar_left = (getActivity()).findViewById(R.id.image_main);
         bar_right = (getActivity()).findViewById(R.id.img_right);
-        //   bar_mid = (getActivity()).findViewById(R.id.image_mid);
+        main_board = (getActivity()).findViewById(R.id.img_main);
+
 
         //left
         btn_left_up = v.findViewById(R.id.btn_left_up);
@@ -194,6 +196,7 @@ public class ControlFragment extends Fragment implements View.OnClickListener, V
             if (degree_left < 0)
                 degree_left = 0;
             bar_left.SetDegree(degree_left);
+            main_board.SetLeftDegree(degree_left);
         }
 
         private void setDegreeForMid(boolean is_up) {
@@ -215,6 +218,9 @@ public class ControlFragment extends Fragment implements View.OnClickListener, V
                 degree_right = -60;
             bar_left.SetDegree(degree_left);
             bar_right.SetDegree(degree_right);
+
+            main_board.SetLeftDegree(degree_left);
+            main_board.SetLeftDegree(degree_right);
         }
 
         private void setDegreeForRight(boolean is_up) {
@@ -228,6 +234,8 @@ public class ControlFragment extends Fragment implements View.OnClickListener, V
             if (degree_right < -60)
                 degree_right = -60;
             bar_right.SetDegree(degree_right);
+            main_board.SetLeftDegree(degree_right);
+
         }
     };
 

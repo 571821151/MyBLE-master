@@ -1,8 +1,6 @@
 package com.clj.blesample.Fragment;
 
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -13,7 +11,7 @@ import android.widget.ImageButton;
 
 import com.clj.blesample.ControlActivity;
 import com.clj.blesample.R;
-import com.clj.blesample.comm.BleOrder;
+import com.clj.blesample.comm.BleUtils;
 import com.clj.fastble.data.BleDevice;
 
 /**
@@ -22,12 +20,6 @@ import com.clj.fastble.data.BleDevice;
 public class SetPositionFragment extends Fragment implements View.OnClickListener {
 
     private BleDevice bleDevice;
-    private Bitmap bitmap_one_b;
-    private Bitmap bitmap_one_w;
-    private Bitmap bitmap_two_b;
-    private Bitmap bitmap_two_w;
-    private Bitmap bitmap_three_w;
-    private Bitmap bitmap_three_b;
 
     private ImageButton btn_one;
     private ImageButton btn_two;
@@ -37,14 +29,6 @@ public class SetPositionFragment extends Fragment implements View.OnClickListene
     private Button btn_cancel_set;
 
     public SetPositionFragment() {
-//        // Required empty public constructor
-//        bitmap_one_b = BitmapFactory.decodeResource(getResources(), R.mipmap.icon_p1_b);
-//        bitmap_one_w = BitmapFactory.decodeResource(getResources(), R.mipmap.icon_p1);
-//        bitmap_two_b = BitmapFactory.decodeResource(getResources(), R.mipmap.icon_p2);
-//        bitmap_two_w = BitmapFactory.decodeResource(getResources(), R.mipmap.icon_p2_w);
-//        bitmap_three_w = BitmapFactory.decodeResource(getResources(), R.mipmap.icon_p2_w);
-//        bitmap_three_b = BitmapFactory.decodeResource(getResources(), R.mipmap.icon_p1_b);
-
 
     }
 
@@ -93,7 +77,7 @@ public class SetPositionFragment extends Fragment implements View.OnClickListene
 
                 break;
             case R.id.btn_set:
-                BleOrder.PostDateForBle(bleDevice, data);
+                BleUtils.PostDateForBle(bleDevice, data);
 
                 ((ControlActivity) getActivity()).changePage(1);
                 break;

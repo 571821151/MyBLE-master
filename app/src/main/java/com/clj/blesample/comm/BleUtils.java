@@ -2,7 +2,7 @@ package com.clj.blesample.comm;
 
 import com.clj.fastble.data.BleDevice;
 
-public class BleOrder {
+public class BleUtils {
 
     public static int HEAD_UP = 0x12;
     public static int FOOT_UP = 0x24;

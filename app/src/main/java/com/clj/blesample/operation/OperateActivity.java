@@ -51,7 +51,7 @@ import com.clj.fastble.scan.BleScanRuleConfig;
 import java.util.ArrayList;
 import java.util.List;
 
-public class OperateActivity extends AppCompatActivity implements View.OnClickListener , Observer {
+public class OperateActivity extends AppCompatActivity implements View.OnClickListener, Observer {
 
     //TAG and others
     private static final String TAG = MainActivity.class.getSimpleName();
@@ -133,7 +133,7 @@ public class OperateActivity extends AppCompatActivity implements View.OnClickLi
             case R.id.btn_connect_xy:
 
                 if (device != null) {
-                     connect(device);
+                    connect(device);
 
                 } else
                     Toast.makeText(OperateActivity.this, R.string.connect_fail, Toast.LENGTH_SHORT).show();
@@ -142,35 +142,29 @@ public class OperateActivity extends AppCompatActivity implements View.OnClickLi
                 startActivity(intent);
                 break;
             case R.id.btn_search:
-                try {
-                    BleManager.getInstance().scan(new BleScanCallback() {
-                        @Override
-                        public void onScanFinished(List<BleDevice> scanResultList) {
-
-                        }
-
-                        @Override
-                        public void onScanStarted(boolean success) {
-
-                        }
-
-                        @Override
-                        public void onScanning(BleDevice bleDevice) {
-                            matchedAdapter.addDevice(bleDevice);
-                            matchedAdapter.notifyDataSetChanged();
-                        }
-                    });
-//                List<BleDevice> deviceList = BleManager.getInstance().getAllConnectedDevice();
+//                try {
+//                    BleManager.getInstance().scan(new BleScanCallback() {
+//                        @Override
+//                        public void onScanFinished(List<BleDevice> scanResultList) {
 //
+//                        }
 //
-//                matchedAdapter.clearConnectedDevice();
-//                for (BleDevice bleDevice : deviceList) {
-//                    matchedAdapter.addDevice(bleDevice);
+//                        @Override
+//                        public void onScanStarted(boolean success) {
+//
+//                        }
+//
+//                        @Override
+//                        public void onScanning(BleDevice bleDevice) {
+//                            matchedAdapter.addDevice(bleDevice);
+//                            matchedAdapter.notifyDataSetChanged();
+//                        }
+//                    });
+//                } catch (Exception e) {
+//                    Toast.makeText(OperateActivity.this, "" + e.toString(), Toast.LENGTH_SHORT).show();
 //                }
-//                matchedAdapter.notifyDataSetChanged();
-                } catch (Exception e) {
-                    Toast.makeText(OperateActivity.this, "" + e.toString(), Toast.LENGTH_SHORT).show();
-                }
+
+                checkPermissions();
                 break;
         }
     }
@@ -234,9 +228,6 @@ public class OperateActivity extends AppCompatActivity implements View.OnClickLi
             public void onScanStarted(boolean success) {
                 matchedAdapter.clearScanDevice();
                 matchedAdapter.notifyDataSetChanged();
-//                img_loading.startAnimation(operatingAnim);
-//                img_loading.setVisibility(View.VISIBLE);
-//                btn_scan.setText(getString(R.string.stop_scan));
             }
 
             @Override
@@ -526,9 +517,7 @@ public class OperateActivity extends AppCompatActivity implements View.OnClickLi
             if (position == cur_pos) {// 如果当前的行就是ListView中选中的一行，就更改显示样式
                 convertView.setBackgroundColor(getResources().getColor(R.color.adapter_back));// 更改整行的背景色
                 device = bleDevice;
-            }
-            else
-            {
+            } else {
                 convertView.setBackgroundColor(getResources().getColor(R.color.white));// 更改整行的背景色
             }
             return convertView;

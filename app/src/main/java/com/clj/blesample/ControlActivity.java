@@ -74,8 +74,8 @@ public class ControlActivity extends AppCompatActivity implements View.OnClickLi
         layout_bottom = findViewById(R.id.layout_bottom);
         tv_back = findViewById(R.id.tv_back);
         tv_back.setOnClickListener(this);
-        initPage();
         ObserverManager.getInstance().addObserver(this);
+        initPage();
     }
 
 
@@ -89,21 +89,24 @@ public class ControlActivity extends AppCompatActivity implements View.OnClickLi
             if (gatt == null) return;
             for (BluetoothGattService service : gatt.getServices()) {
                 UUID uuid = service.getUuid();
-
-                int charaProp = service.getCharacteristic(uuid).getProperties();
-                switch (charaProp) {
-                    case PROPERTY_WRITE_NO_RESPONSE:
-                    case PROPERTY_WRITE:
-                        characteristicWrite = service.getCharacteristic(uuid);
-                        break;
-                    default:
-                        break;
+                for (BluetoothGattCharacteristic characteristic : service.getCharacteristics()) {
+                    int charaProp = characteristic.getProperties();
+                    switch (charaProp) {
+                        case PROPERTY_WRITE_NO_RESPONSE:
+                        case PROPERTY_WRITE:
+                            characteristicWrite = characteristic;
+                            writeBleMessage("0x10");
+                            break;
+                        default:
+                            break;
+                    }
                 }
+
                 break;
             }
 
         }
-        writeBleMessage("0x10");
+
 
     }
 
@@ -176,7 +179,7 @@ public class ControlActivity extends AppCompatActivity implements View.OnClickLi
             if (i == position) {
                 transaction.show(fragment);
                 if (i == 2)
-                    layout_bottom.setVisibility(View.INVISIBLE);
+                    layout_bottom.setVisibility(View.GONE);
                 else
                     layout_bottom.setVisibility(View.VISIBLE);
             } else {

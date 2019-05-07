@@ -3,8 +3,17 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorPrimaryDark">@color/black</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowAnimationStyle">@style/translate</item>
+    </style>
+
+    <style name="translate" parent="@android:style/Animation.Activity"> 
+               
+        <item name="android:activityOpenEnterAnimation">@anim/slide</item>
+
+           
     </style>
 
     <style name="AppTheme.NoActionBar">
