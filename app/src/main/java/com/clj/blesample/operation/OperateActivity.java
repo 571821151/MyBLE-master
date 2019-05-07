@@ -138,33 +138,11 @@ public class OperateActivity extends BaseActivity implements View.OnClickListene
 
                 } else
                     Toast.makeText(OperateActivity.this, R.string.connect_fail, Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(getApplicationContext(), ControlActivity.class);
-                intent.putExtra(OperationActivity.KEY_DATA, device);
-                startActivity(intent);
+//                Intent intent = new Intent(getApplicationContext(), ControlActivity.class);
+//                intent.putExtra(OperationActivity.KEY_DATA, device);
+//                startActivity(intent);
                 break;
             case R.id.btn_search:
-//                try {
-//                    BleManager.getInstance().scan(new BleScanCallback() {
-//                        @Override
-//                        public void onScanFinished(List<BleDevice> scanResultList) {
-//
-//                        }
-//
-//                        @Override
-//                        public void onScanStarted(boolean success) {
-//
-//                        }
-//
-//                        @Override
-//                        public void onScanning(BleDevice bleDevice) {
-//                            matchedAdapter.addDevice(bleDevice);
-//                            matchedAdapter.notifyDataSetChanged();
-//                        }
-//                    });
-//                } catch (Exception e) {
-//                    Toast.makeText(OperateActivity.this, "" + e.toString(), Toast.LENGTH_SHORT).show();
-//                }
-
                 checkPermissions();
                 break;
         }

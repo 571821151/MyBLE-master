@@ -21,6 +21,9 @@ public class MainBoard extends View {
     private float right_progress;
 
     private Matrix matrix;
+    private Matrix matrix1;
+    private Matrix matrix2;
+    private Matrix matrix3;
 
     private Bitmap bitmap_left;
     private Bitmap bitmap_mid;
@@ -52,22 +55,22 @@ public class MainBoard extends View {
         //最大变换范围
         //left image
         matrix = new Matrix();
-        matrix.setRotate(left_progress, bitmap_left.getWidth(), bitmap_left.getHeight());
+        matrix.setRotate(left_progress, bitmap_left.getWidth(), bitmap_left.getHeight() / 2);
         matrix.postTranslate(0, height);
         canvas.drawBitmap(bitmap_left, matrix, paint);
 
         //mid image
-        matrix = new Matrix();
-        matrix.setTranslate(bitmap_left.getWidth(), height);
-        canvas.drawBitmap(bitmap_mid, matrix, paint);
+        matrix1 = new Matrix();
+        matrix1.setTranslate(bitmap_left.getWidth(), height);
+        canvas.drawBitmap(bitmap_mid, matrix1, paint);
 
         Integer left_width = bitmap_left.getWidth() + bitmap_mid.getWidth();
         //right bar
-        matrix = new Matrix();
-        matrix.setRotate(right_progress, 0, bitmap_right_1.getHeight());
+        matrix2 = new Matrix();
+        matrix2.setRotate(right_progress, 0, bitmap_right_1.getHeight() / 2);
 
-        matrix.postTranslate(left_width, height);
-        canvas.drawBitmap(bitmap_right_1, matrix, null);
+        matrix2.postTranslate(left_width, height);
+        canvas.drawBitmap(bitmap_right_1, matrix2, null);
         double rect_angle = -right_progress / 180 * Math.PI;
 
         int width = bitmap_right_1.getWidth();

@@ -179,7 +179,7 @@ public class ControlActivity extends AppCompatActivity implements View.OnClickLi
             if (i == position) {
                 transaction.show(fragment);
                 if (i == 2)
-                    layout_bottom.setVisibility(View.GONE);
+                    layout_bottom.setVisibility(View.INVISIBLE);
                 else
                     layout_bottom.setVisibility(View.VISIBLE);
             } else {

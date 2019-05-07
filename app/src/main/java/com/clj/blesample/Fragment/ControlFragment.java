@@ -220,7 +220,7 @@ public class ControlFragment extends Fragment implements View.OnClickListener, V
             bar_right.SetDegree(degree_right);
 
             main_board.SetLeftDegree(degree_left);
-            main_board.SetLeftDegree(degree_right);
+            main_board.SetRightDegree(degree_right);
         }
 
         private void setDegreeForRight(boolean is_up) {
@@ -234,7 +234,7 @@ public class ControlFragment extends Fragment implements View.OnClickListener, V
             if (degree_right < -60)
                 degree_right = -60;
             bar_right.SetDegree(degree_right);
-            main_board.SetLeftDegree(degree_right);
+            main_board.SetRightDegree(degree_right);
 
         }
     };
