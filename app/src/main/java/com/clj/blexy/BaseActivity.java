@@ -1,9 +1,9 @@
-package com.clj.blesample;
+package com.clj.blexy;
 
 import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 
-import com.clj.blesample.comm.LocalManageUtil;
+import com.clj.blexy.comm.LocalManageUtil;
 
 public class BaseActivity extends AppCompatActivity {
     @Override

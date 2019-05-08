@@ -1,4 +1,4 @@
-package com.clj.blesample.Fragment;
+package com.clj.blexy.Fragment;
 
 
 import android.os.Bundle;
@@ -9,10 +9,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 
-import com.clj.blesample.ControlActivity;
-import com.clj.blesample.R;
-import com.clj.blesample.comm.BleUtils;
-import com.clj.fastble.data.BleDevice;
+import com.clj.blexy.ControlActivity;
+import com.clj.blexy.R;
+import com.clj.blexy.comm.BleUtils;
 
 /**
  * A simple {@link Fragment} subclass.

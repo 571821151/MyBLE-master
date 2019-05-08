@@ -1,4 +1,4 @@
-package com.clj.blesample.DB;
+package com.clj.blexy.DB;
 
 import org.litepal.annotation.Column;
 import org.litepal.crud.DataSupport;

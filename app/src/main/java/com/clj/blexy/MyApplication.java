@@ -1,4 +1,4 @@
-package com.clj.blesample;
+package com.clj.blexy;
 
 
 import android.util.Log;

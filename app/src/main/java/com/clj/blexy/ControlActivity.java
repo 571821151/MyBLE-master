@@ -2,7 +2,7 @@
  * Copyright (cly) 2019.
  */
 
-package com.clj.blesample;
+package com.clj.blexy;
 
 import android.bluetooth.BluetoothGatt;
 import android.bluetooth.BluetoothGattCharacteristic;
@@ -19,11 +19,11 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.clj.blesample.Fragment.ControlFragment;
-import com.clj.blesample.Fragment.SetPositionFragment;
-import com.clj.blesample.Fragment.SettingFragment;
-import com.clj.blesample.comm.Observer;
-import com.clj.blesample.comm.ObserverManager;
+import com.clj.blexy.Fragment.ControlFragment;
+import com.clj.blexy.Fragment.SetPositionFragment;
+import com.clj.blexy.Fragment.SettingFragment;
+import com.clj.blexy.comm.Observer;
+import com.clj.blexy.comm.ObserverManager;
 import com.clj.fastble.BleManager;
 import com.clj.fastble.callback.BleWriteCallback;
 import com.clj.fastble.data.BleDevice;

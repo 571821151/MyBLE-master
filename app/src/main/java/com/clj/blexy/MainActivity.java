@@ -1,4 +1,4 @@
-package com.clj.blesample;
+package com.clj.blexy;
 
 import android.Manifest;
 import android.app.AlertDialog;
@@ -16,7 +16,6 @@ import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.Log;
@@ -33,11 +32,10 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.clj.blesample.DB.ConfigBean;
-import com.clj.blesample.adapter.DeviceAdapter;
-import com.clj.blesample.comm.ObserverManager;
-import com.clj.blesample.operation.OperateActivity;
-import com.clj.blesample.operation.OperationActivity;
+import com.clj.blexy.adapter.DeviceAdapter;
+import com.clj.blexy.comm.ObserverManager;
+import com.clj.blexy.operation.OperateActivity;
+import com.clj.blexy.operation.OperationActivity;
 import com.clj.fastble.BleManager;
 import com.clj.fastble.callback.BleGattCallback;
 import com.clj.fastble.callback.BleMtuChangedCallback;
@@ -46,8 +44,6 @@ import com.clj.fastble.callback.BleScanCallback;
 import com.clj.fastble.data.BleDevice;
 import com.clj.fastble.exception.BleException;
 import com.clj.fastble.scan.BleScanRuleConfig;
-
-import org.litepal.crud.DataSupport;
 
 import java.util.ArrayList;
 import java.util.List;

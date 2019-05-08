@@ -1,4 +1,4 @@
-package com.clj.blesample.operation;
+package com.clj.blexy.operation;
 
 import android.annotation.TargetApi;
 import android.bluetooth.BluetoothGattCharacteristic;
@@ -15,7 +15,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.clj.blesample.R;
+import com.clj.blexy.R;
 import com.clj.fastble.BleManager;
 import com.clj.fastble.callback.BleIndicateCallback;
 import com.clj.fastble.callback.BleNotifyCallback;

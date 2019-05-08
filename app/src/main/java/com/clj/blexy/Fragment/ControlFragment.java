@@ -1,4 +1,4 @@
-package com.clj.blesample.Fragment;
+package com.clj.blexy.Fragment;
 
 import android.os.Bundle;
 import android.os.Handler;
@@ -10,10 +10,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import com.clj.blesample.ControlActivity;
-import com.clj.blesample.R;
-import com.clj.blesample.View.MainBoard;
-import com.clj.blesample.comm.BleUtils;
+import com.clj.blexy.ControlActivity;
+import com.clj.blexy.R;
+import com.clj.blexy.View.MainBoard;
+import com.clj.blexy.comm.BleUtils;
 
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;

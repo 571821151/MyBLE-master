@@ -39,7 +39,7 @@
             android:layout_gravity="center_horizontal"
             android:orientation="horizontal">
 
-            <com.clj.blesample.View.MainBoard
+            <com.clj.blexy.View.MainBoard
                 android:id="@+id/img_main"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"

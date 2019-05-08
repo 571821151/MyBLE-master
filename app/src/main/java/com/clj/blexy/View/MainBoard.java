@@ -2,7 +2,7 @@
  * Copyright (cly) 2019.
  */
 
-package com.clj.blesample.View;
+package com.clj.blexy.View;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -14,7 +14,7 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
 
-import com.clj.blesample.R;
+import com.clj.blexy.R;
 
 public class MainBoard extends View {
     private float left_progress;

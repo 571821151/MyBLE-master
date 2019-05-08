@@ -32,7 +32,7 @@
         </list>
     -->
     <list>
-        <mapping class="com.clj.blesample.DB.ConfigBean"></mapping>
+        <mapping class="com.clj.blexy.DB.ConfigBean"></mapping>
     </list>
 
     <!--

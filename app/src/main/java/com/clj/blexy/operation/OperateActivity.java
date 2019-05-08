@@ -2,7 +2,7 @@
  * Copyright (cly) 2019.
  */
 
-package com.clj.blesample.operation;
+package com.clj.blexy.operation;
 
 import android.Manifest;
 import android.app.AlertDialog;
@@ -31,13 +31,12 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.clj.blesample.BaseActivity;
-import com.clj.blesample.ControlActivity;
-import com.clj.blesample.MainActivity;
-import com.clj.blesample.R;
-import com.clj.blesample.comm.Observable;
-import com.clj.blesample.comm.Observer;
-import com.clj.blesample.comm.ObserverManager;
+import com.clj.blexy.BaseActivity;
+import com.clj.blexy.ControlActivity;
+import com.clj.blexy.MainActivity;
+import com.clj.blexy.R;
+import com.clj.blexy.comm.Observer;
+import com.clj.blexy.comm.ObserverManager;
 import com.clj.fastble.BleManager;
 import com.clj.fastble.callback.BleGattCallback;
 import com.clj.fastble.callback.BleMtuChangedCallback;

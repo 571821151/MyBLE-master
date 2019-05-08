@@ -1,9 +1,9 @@
-package com.clj.blesample.comm;
+package com.clj.blexy.comm;
 
 
 import android.util.Log;
 
-import com.clj.blesample.ControlActivity;
+import com.clj.blexy.ControlActivity;
 
 public class BleUtils {
     public static final String TAG = "BleUtils";

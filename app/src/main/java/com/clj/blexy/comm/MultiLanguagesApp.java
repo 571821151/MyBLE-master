@@ -1,4 +1,4 @@
-package com.clj.blesample.comm;
+package com.clj.blexy.comm;
 
 import android.app.Application;
 import android.content.Context;

@@ -1,4 +1,4 @@
-package com.clj.blesample.comm;
+package com.clj.blexy.comm;
 
 
 import com.clj.fastble.data.BleDevice;

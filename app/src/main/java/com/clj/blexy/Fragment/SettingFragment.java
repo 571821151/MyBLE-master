@@ -1,4 +1,4 @@
-package com.clj.blesample.Fragment;
+package com.clj.blexy.Fragment;
 
 
 import android.os.Bundle;
@@ -9,9 +9,9 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 
-import com.clj.blesample.ControlActivity;
-import com.clj.blesample.R;
-import com.clj.blesample.comm.BleUtils;
+import com.clj.blexy.ControlActivity;
+import com.clj.blexy.R;
+import com.clj.blexy.comm.BleUtils;
 
 
 /**

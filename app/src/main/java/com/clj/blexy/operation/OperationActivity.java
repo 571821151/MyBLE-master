@@ -1,4 +1,4 @@
-package com.clj.blesample.operation;
+package com.clj.blexy.operation;
 
 
 import android.bluetooth.BluetoothGattCharacteristic;
@@ -11,9 +11,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
 import android.view.View;
 
-import com.clj.blesample.R;
-import com.clj.blesample.comm.Observer;
-import com.clj.blesample.comm.ObserverManager;
+import com.clj.blexy.R;
+import com.clj.blexy.comm.Observer;
+import com.clj.blexy.comm.ObserverManager;
 import com.clj.fastble.BleManager;
 import com.clj.fastble.data.BleDevice;
 

@@ -1,4 +1,4 @@
-package com.clj.blesample.comm;
+package com.clj.blexy.comm;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.content.res.Resources;

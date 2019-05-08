@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.clj.blesample">
+    package="com.clj.blexy">
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.BLUETOOTH" />
@@ -16,14 +16,14 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".ControlActivity"
+            android:name="com.clj.blexy.ControlActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity android:name=".MainActivity">
+        <activity android:name="com.clj.blexy.MainActivity">
 
         </activity>
-        <activity android:name=".operation.OperationActivity" />
-        <activity android:name=".operation.OperateActivity" >
+        <activity android:name="com.clj.blexy.operation.OperationActivity" />
+        <activity android:name="com.clj.blexy.operation.OperateActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
