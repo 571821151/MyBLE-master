@@ -1,7 +1,12 @@
 package com.clj.blesample.comm;
 
 
+import android.util.Log;
+
+import com.clj.blesample.ControlActivity;
+
 public class BleUtils {
+    public static final String TAG = "BleUtils";
 
     public static String RESET = "0x30"; //复位	电机初始位置
     public static String HEAD_UP = "0x31";//1号电机升	头部电机
@@ -32,5 +37,11 @@ public class BleUtils {
     public static String RELEASE_CODE = "0x1A";//按键释放
     public static String SET_CODE = "0x0A";//设置键
 
+    public static void writeBleCode(ControlActivity controlActivity, String ble_code) {
+        if (controlActivity == null)
+            Log.e(TAG, "writeBleCode: " + "no controlActivity");
+        else
+            controlActivity.writeBleMessage(ble_code);
+    }
 
 }

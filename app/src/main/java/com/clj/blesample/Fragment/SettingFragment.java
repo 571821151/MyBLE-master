@@ -7,9 +7,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 
 import com.clj.blesample.ControlActivity;
 import com.clj.blesample.R;
+import com.clj.blesample.comm.BleUtils;
 
 
 /**
@@ -17,6 +19,15 @@ import com.clj.blesample.R;
  */
 public class SettingFragment extends Fragment implements View.OnClickListener {
     private ImageButton btn_setting_position;
+
+
+    private LinearLayout layout_p1;
+    private LinearLayout layout_p2;
+    private LinearLayout layout_p3;
+    private LinearLayout layout_flat;
+
+
+    private ControlActivity controlActivity;
 
     public SettingFragment() {
         // Required empty public constructor
@@ -36,13 +47,40 @@ public class SettingFragment extends Fragment implements View.OnClickListener {
     private void initView(View v) {
         btn_setting_position = v.findViewById(R.id.btn_setting_position);
         btn_setting_position.setOnClickListener(this);
+        layout_p1 = v.findViewById(R.id.layout_p1);
+
+        layout_p2 = v.findViewById(R.id.layout_p2);
+        layout_p3 = v.findViewById(R.id.layout_p3);
+        layout_flat = v.findViewById(R.id.layout_flat);
+
+
+        layout_p1.setOnClickListener(this);
+        layout_p2.setOnClickListener(this);
+        layout_p3.setOnClickListener(this);
+        layout_flat.setOnClickListener(this);
+        controlActivity = ((ControlActivity) getActivity());
     }
 
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_setting_position:
-                ((ControlActivity) getActivity()).changePage(2);
+                controlActivity.changePage(2);
+                break;
+            case R.id.layout_p1:
+                BleUtils.writeBleCode(controlActivity, BleUtils.MEMORY_POSITION_ONE);
+                break;
+            case R.id.layout_p2:
+                BleUtils.writeBleCode(controlActivity, BleUtils.MEMORY_POSITION_TWO);
+
+                break;
+            case R.id.layout_p3:
+                BleUtils.writeBleCode(controlActivity, BleUtils.MEMORY_POSITION_FOUR);
+
+                break;
+            case R.id.layout_flat:
+                BleUtils.writeBleCode(controlActivity, BleUtils.RESET);
+
                 break;
         }
     }

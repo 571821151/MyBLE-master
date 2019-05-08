@@ -51,12 +51,6 @@ public class ControlActivity extends AppCompatActivity implements View.OnClickLi
     private LinearLayout layout_bottom;
 
 
-    public static final int PROPERTY_READ = 1;
-    public static final int PROPERTY_WRITE = 2;
-    public static final int PROPERTY_WRITE_NO_RESPONSE = 3;
-    public static final int PROPERTY_NOTIFY = 4;
-    public static final int PROPERTY_INDICATE = 5;
-
 
     private BluetoothGattCharacteristic characteristicWrite;
 
@@ -209,7 +203,7 @@ public class ControlActivity extends AppCompatActivity implements View.OnClickLi
 
                 //把返回数据存入Intent
 
-                intent.putExtra("result", "My name is linjiqin");
+                intent.putExtra("result", "My name is ChenLingYun");
 
                 //设置返回数据
 

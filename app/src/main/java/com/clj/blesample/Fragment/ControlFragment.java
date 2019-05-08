@@ -1,11 +1,9 @@
 package com.clj.blesample.Fragment;
 
-import android.nfc.Tag;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -105,9 +103,8 @@ public class ControlFragment extends Fragment implements View.OnTouchListener {
             isTouched = true;
         } else if (event.getAction() == MotionEvent.ACTION_UP) {
             stopAddOrSubtract();    //手指抬起时停止发送
-            for (int i = 0; i < 5; i++) writeBleCode(BleUtils.RELEASE_CODE);
-
-
+            for (int i = 0; i < 4; i++)
+                BleUtils.writeBleCode(controlActivity, BleUtils.RELEASE_CODE);
             isTouched = false;
         }
         return true;
@@ -134,12 +131,6 @@ public class ControlFragment extends Fragment implements View.OnTouchListener {
         }
     }
 
-    private void writeBleCode(String ble_code) {
-        if (controlActivity == null)
-            Log.e(TAG, "writeBleCode: " + "no controlActivity");
-        else
-            controlActivity.writeBleMessage(ble_code);
-    }
 
     private Handler handler = new Handler() {
         @Override
@@ -148,31 +139,31 @@ public class ControlFragment extends Fragment implements View.OnTouchListener {
             switch (viewId) {
                 case R.id.btn_left_up:
                     setDegreeForLeft(true);
-                    writeBleCode(BleUtils.HEAD_UP);
+                    BleUtils.writeBleCode(controlActivity, BleUtils.HEAD_UP);
                     break;
                 case R.id.btn_left_down:
                     setDegreeForLeft(false);
 
-                    writeBleCode(BleUtils.HEAD_DOWN);
+                    BleUtils.writeBleCode(controlActivity, BleUtils.HEAD_DOWN);
                     break;
                 case R.id.btn_mid_up:
                     setDegreeForMid(true);
 
-                    writeBleCode(BleUtils.HEAD_AND_LEG_UP);
+                    BleUtils.writeBleCode(controlActivity, BleUtils.HEAD_AND_LEG_UP);
                     break;
                 case R.id.btn_mid_down:
 
                     setDegreeForMid(false);
 
-                    writeBleCode(BleUtils.HEAD_AND_LEG_DOWN);
+                    BleUtils.writeBleCode(controlActivity, BleUtils.HEAD_AND_LEG_DOWN);
                     break;
                 case R.id.btn_right_up:
                     setDegreeForRight(true);
 
-                    writeBleCode(BleUtils.LEG_UP);
+                    BleUtils.writeBleCode(controlActivity, BleUtils.LEG_UP);
                     break;
                 case R.id.btn_right_down:
-                    writeBleCode(BleUtils.LEG_DOWN);
+                    BleUtils.writeBleCode(controlActivity, BleUtils.LEG_DOWN);
 
                     setDegreeForRight(false);
                     break;
@@ -226,7 +217,6 @@ public class ControlFragment extends Fragment implements View.OnTouchListener {
             if (degree_right < -60)
                 degree_right = -60;
             main_board.SetRightDegree(degree_right);
-
         }
     };
 
