@@ -1,30 +1,35 @@
 package com.clj.blesample.Fragment;
 
+import android.nfc.Tag;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.clj.blesample.ControlActivity;
 import com.clj.blesample.R;
-import com.clj.blesample.View.LeftBoard;
 import com.clj.blesample.View.MainBoard;
-import com.clj.blesample.View.RightBoard;
+import com.clj.blesample.comm.BleUtils;
 
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 
-public class ControlFragment extends Fragment implements View.OnClickListener, View.OnTouchListener {
+public class ControlFragment extends Fragment implements View.OnTouchListener {
     private boolean isTouched = false;
 
+    private final String TAG = getClass().getName();
     private int degree_left = 0;
     private int degree_right = 0;
+
+    private ControlActivity controlActivity;
 
 
     private Button btn_left_up;
@@ -38,8 +43,6 @@ public class ControlFragment extends Fragment implements View.OnClickListener, V
     private Button btn_right_down;
 
 
-    private LeftBoard bar_left;
-    private RightBoard bar_right;
     private MainBoard main_board;
     private ScheduledExecutorService scheduledExecutor;
 
@@ -53,6 +56,7 @@ public class ControlFragment extends Fragment implements View.OnClickListener, V
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_control, null);
         initView(v);
+        controlActivity = (ControlActivity) getActivity();
         return v;
     }
 
@@ -64,8 +68,6 @@ public class ControlFragment extends Fragment implements View.OnClickListener, V
 
 
     private View initView(View v) {
-        bar_left = (getActivity()).findViewById(R.id.image_main);
-        bar_right = (getActivity()).findViewById(R.id.img_right);
         main_board = (getActivity()).findViewById(R.id.img_main);
 
 
@@ -95,33 +97,6 @@ public class ControlFragment extends Fragment implements View.OnClickListener, V
 
 
     @Override
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.btn_left_up:
-
-
-                break;
-            case R.id.btn_left_down:
-
-                break;
-            case R.id.btn_mid_up:
-
-                break;
-            case R.id.btn_mid_down:
-
-                break;
-            case R.id.btn_right_up:
-
-                break;
-            case R.id.btn_right_down:
-
-                break;
-
-        }
-    }
-
-
-    @Override
     public boolean onTouch(View view, MotionEvent event) {
         if (event.getAction() == MotionEvent.ACTION_DOWN) {
             if (isTouched)
@@ -130,6 +105,9 @@ public class ControlFragment extends Fragment implements View.OnClickListener, V
             isTouched = true;
         } else if (event.getAction() == MotionEvent.ACTION_UP) {
             stopAddOrSubtract();    //手指抬起时停止发送
+            for (int i = 0; i < 5; i++) writeBleCode(BleUtils.RELEASE_CODE);
+
+
             isTouched = false;
         }
         return true;
@@ -146,7 +124,7 @@ public class ControlFragment extends Fragment implements View.OnClickListener, V
                 msg.what = vid;
                 handler.sendMessage(msg);
             }
-        }, 0, 100, TimeUnit.MILLISECONDS);    //每间隔100ms发送Message
+        }, 0, 130, TimeUnit.MILLISECONDS);    //每间隔130ms发送Message
     }
 
     private void stopAddOrSubtract() {
@@ -156,6 +134,12 @@ public class ControlFragment extends Fragment implements View.OnClickListener, V
         }
     }
 
+    private void writeBleCode(String ble_code) {
+        if (controlActivity == null)
+            Log.e(TAG, "writeBleCode: " + "no controlActivity");
+        else
+            controlActivity.writeBleMessage(ble_code);
+    }
 
     private Handler handler = new Handler() {
         @Override
@@ -164,26 +148,37 @@ public class ControlFragment extends Fragment implements View.OnClickListener, V
             switch (viewId) {
                 case R.id.btn_left_up:
                     setDegreeForLeft(true);
+                    writeBleCode(BleUtils.HEAD_UP);
                     break;
                 case R.id.btn_left_down:
                     setDegreeForLeft(false);
+
+                    writeBleCode(BleUtils.HEAD_DOWN);
                     break;
                 case R.id.btn_mid_up:
                     setDegreeForMid(true);
+
+                    writeBleCode(BleUtils.HEAD_AND_LEG_UP);
                     break;
                 case R.id.btn_mid_down:
 
                     setDegreeForMid(false);
+
+                    writeBleCode(BleUtils.HEAD_AND_LEG_DOWN);
                     break;
                 case R.id.btn_right_up:
                     setDegreeForRight(true);
+
+                    writeBleCode(BleUtils.LEG_UP);
                     break;
                 case R.id.btn_right_down:
+                    writeBleCode(BleUtils.LEG_DOWN);
 
                     setDegreeForRight(false);
                     break;
             }
         }
+
 
         private void setDegreeForLeft(boolean is_up) {
 
@@ -195,7 +190,6 @@ public class ControlFragment extends Fragment implements View.OnClickListener, V
                 degree_left = 60;
             if (degree_left < 0)
                 degree_left = 0;
-            bar_left.SetDegree(degree_left);
             main_board.SetLeftDegree(degree_left);
         }
 
@@ -216,8 +210,6 @@ public class ControlFragment extends Fragment implements View.OnClickListener, V
                 degree_right = 0;
             if (degree_right < -60)
                 degree_right = -60;
-            bar_left.SetDegree(degree_left);
-            bar_right.SetDegree(degree_right);
 
             main_board.SetLeftDegree(degree_left);
             main_board.SetRightDegree(degree_right);
@@ -233,7 +225,6 @@ public class ControlFragment extends Fragment implements View.OnClickListener, V
                 degree_right = 0;
             if (degree_right < -60)
                 degree_right = -60;
-            bar_right.SetDegree(degree_right);
             main_board.SetRightDegree(degree_right);
 
         }

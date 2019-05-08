@@ -77,7 +77,6 @@ public class SetPositionFragment extends Fragment implements View.OnClickListene
 
                 break;
             case R.id.btn_set:
-                BleUtils.PostDateForBle(bleDevice, data);
 
                 ((ControlActivity) getActivity()).changePage(1);
                 break;

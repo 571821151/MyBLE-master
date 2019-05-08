@@ -91,15 +91,17 @@ public class ControlActivity extends AppCompatActivity implements View.OnClickLi
                 UUID uuid = service.getUuid();
                 for (BluetoothGattCharacteristic characteristic : service.getCharacteristics()) {
                     int charaProp = characteristic.getProperties();
-                    switch (charaProp) {
-                        case PROPERTY_WRITE_NO_RESPONSE:
-                        case PROPERTY_WRITE:
-                            characteristicWrite = characteristic;
-                            writeBleMessage("0x10");
-                            break;
-                        default:
-                            break;
+                    if ((charaProp | BluetoothGattCharacteristic.PROPERTY_WRITE) > 0) {
+                        characteristicWrite = characteristic;
+
                     }
+                    if ((charaProp | BluetoothGattCharacteristic.PROPERTY_WRITE_NO_RESPONSE) > 0) {
+                        characteristicWrite = characteristic;
+
+                    }
+                    writeBleMessage("0x10");
+                    break;
+
                 }
 
                 break;
