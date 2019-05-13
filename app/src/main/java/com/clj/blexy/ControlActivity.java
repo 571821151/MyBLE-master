@@ -51,7 +51,6 @@ public class ControlActivity extends AppCompatActivity implements View.OnClickLi
     private LinearLayout layout_bottom;
 
 
-
     private BluetoothGattCharacteristic characteristicWrite;
 
     @Override
@@ -85,15 +84,12 @@ public class ControlActivity extends AppCompatActivity implements View.OnClickLi
                 UUID uuid = service.getUuid();
                 for (BluetoothGattCharacteristic characteristic : service.getCharacteristics()) {
                     int charaProp = characteristic.getProperties();
-                    if ((charaProp | BluetoothGattCharacteristic.PROPERTY_WRITE) > 0) {
-                        characteristicWrite = characteristic;
 
-                    }
                     if ((charaProp | BluetoothGattCharacteristic.PROPERTY_WRITE_NO_RESPONSE) > 0) {
                         characteristicWrite = characteristic;
 
                     }
-                    writeBleMessage("0x10");
+                    writeBleMessage("0x05393ef9");
                     break;
 
                 }
@@ -104,6 +100,13 @@ public class ControlActivity extends AppCompatActivity implements View.OnClickLi
         }
 
 
+    }
+
+    private byte[] get_hex(String hex) {
+        Integer code = Integer.parseInt(hex);
+        code = code + 0x05;
+
+        return HexUtil.hexStringToBytes(hex);
     }
 
     public void writeBleMessage(String hex) {
