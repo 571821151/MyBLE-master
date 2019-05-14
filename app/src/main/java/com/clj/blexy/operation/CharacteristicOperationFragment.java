@@ -53,7 +53,7 @@ public class CharacteristicOperationFragment extends Fragment {
 
     public void showData() {
         final BleDevice bleDevice = ((OperationActivity) getActivity()).getBleDevice();
-        final BluetoothGattCharacteristic characteristic = ((OperationActivity) getActivity()).getCharacteristic();
+        final BluetoothGattCharacteristic  characteristic = ((OperationActivity) getActivity()).getCharacteristic();
         final int charaProp = ((OperationActivity) getActivity()).getCharaProp();
         String child = characteristic.getUuid().toString() + String.valueOf(charaProp);
 

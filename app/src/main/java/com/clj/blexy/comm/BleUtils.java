@@ -49,6 +49,8 @@ public class BleUtils {
         else {
             Integer final_int = Integer.parseInt(new BigInteger(ble_code, 16).toString()) + Integer.parseInt(new BigInteger(SEND_CODE, 16).toString());
             ble_code = SEND_CODE + ble_code + HexUtil.numToHex8(final_int) + END_CODE;
+
+            Log.d(TAG, "writeBleCode: Just write ble message " + ble_code);
             controlActivity.writeBleMessage(ble_code);
         }
     }

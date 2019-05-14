@@ -29,6 +29,7 @@ import com.clj.blexy.comm.BleUtils;
 import com.clj.blexy.comm.Observer;
 import com.clj.blexy.comm.ObserverManager;
 import com.clj.fastble.BleManager;
+import com.clj.fastble.callback.BleReadCallback;
 import com.clj.fastble.callback.BleWriteCallback;
 import com.clj.fastble.data.BleDevice;
 import com.clj.fastble.exception.BleException;
@@ -56,6 +57,7 @@ public class ControlActivity extends AppCompatActivity implements View.OnClickLi
 
 
     private BluetoothGattCharacteristic characteristicWrite;
+    private BluetoothGattCharacteristic characteristicNotify;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,8 +94,8 @@ public class ControlActivity extends AppCompatActivity implements View.OnClickLi
                 UUID uuid = service.getUuid();
                 for (BluetoothGattCharacteristic characteristic : service.getCharacteristics()) {
                     int charaProp = characteristic.getProperties();
-                    if ((charaProp | BluetoothGattCharacteristic.PROPERTY_WRITE) > 0) {
-                        characteristicWrite = characteristic;
+                    if ((charaProp | BluetoothGattCharacteristic.PROPERTY_NOTIFY) > 0) {
+                        characteristicNotify = characteristic;
 
                     }
                     if ((charaProp | BluetoothGattCharacteristic.PROPERTY_WRITE_NO_RESPONSE) > 0) {
@@ -215,6 +217,38 @@ public class ControlActivity extends AppCompatActivity implements View.OnClickLi
         }
     }
 
+    public void readBleMessage(String hex) {
+        if (characteristicNotify == null)
+            return;
+        else {
+            BleManager.getInstance().read(
+                    bleDevice,
+                    characteristicNotify.getService().getUuid().toString(),
+                    characteristicNotify.getUuid().toString(),
+                    new BleReadCallback() {
+
+                        @Override
+                        public void onReadSuccess(final byte[] data) {
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    /*todo for read message*/
+                                }
+                            });
+                        }
+
+                        @Override
+                        public void onReadFailure(final BleException exception) {
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Toast.makeText(ControlActivity.this, "蓝牙读取失败", Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                        }
+                    });
+        }
+    }
 
     public void changePage(int page) {
         currentPage = page;
