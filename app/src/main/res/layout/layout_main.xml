@@ -11,10 +11,12 @@
         android:layout_weight="2"
         android:background="@color/backOfMain"
         android:orientation="vertical">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:orientation="horizontal">
+
             <TextView
                 android:id="@+id/tv_back"
                 android:layout_width="match_parent"
@@ -29,30 +31,68 @@
                 android:textSize="18sp"
                 android:textStyle="bold" />
         </LinearLayout>
+
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginLeft="90dp"
+            android:layout_marginLeft="100dp"
             android:layout_marginRight="70dp"
             android:layout_weight="1"
-            android:visibility="visible"
             android:layout_gravity="center_horizontal"
-            android:orientation="horizontal">
+            android:orientation="vertical"
+            android:visibility="visible">
 
-            <com.clj.blexy.View.MainBoard
-                android:id="@+id/img_main"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_weight="1" />
+            <!--<com.clj.blexy.View.MainBoard-->
+            <!--android:id="@+id/img_main"-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_gravity="center_horizontal"-->
+            <!--android:layout_weight="1" />-->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/img1"
+                    android:layout_width="0dp"
+                    android:layout_height="17dp"
+                    android:layout_weight="1"
+                    android:src="@mipmap/log1" />
+
+                <ImageView
+                    android:id="@+id/img2"
+
+                    android:layout_width="0dp"
+                    android:layout_height="17dp"
+                    android:layout_weight="1"
+                    android:src="@mipmap/logo2" />
+
+                <ImageView
+
+                    android:id="@+id/img3"
+
+                    android:layout_width="0dp"
+                    android:layout_height="17dp"
+                    android:layout_weight="1"
+                    android:src="@mipmap/log4" />
+
+                <ImageView
+                    android:id="@+id/img4"
+                    android:layout_width="0dp"
+                    android:layout_height="17dp"
+                    android:layout_weight="1"
+                    android:src="@mipmap/logo4" />
+            </LinearLayout>
         </LinearLayout>
 
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="20dp"
-            android:layout_marginBottom="40dp"
             android:layout_gravity="center"
+            android:layout_marginBottom="40dp"
             android:drawableStart="@mipmap/bluetooth"
             android:gravity="center"
             android:text="@string/blueToothConnected"
@@ -92,14 +132,14 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
-                android:layout_weight="60"
-                android:layout_gravity="center">
+                android:layout_gravity="center"
+                android:layout_weight="60">
 
                 <ImageView
                     android:id="@+id/view_left"
                     android:layout_width="30dp"
-                    android:layout_gravity="bottom"
                     android:layout_height="30dp"
+                    android:layout_gravity="bottom"
                     android:src="@mipmap/control_w" />
             </LinearLayout>
 
@@ -126,15 +166,17 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
-                android:layout_weight="60"
-                android:layout_gravity="center">
-            <ImageView
-                android:id="@+id/view_right"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_gravity="bottom"
-                android:src="@mipmap/mode_g" />
+                android:layout_gravity="center"
+                android:layout_weight="60">
+
+                <ImageView
+                    android:id="@+id/view_right"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="bottom"
+                    android:src="@mipmap/mode_g" />
             </LinearLayout>
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="0dp"

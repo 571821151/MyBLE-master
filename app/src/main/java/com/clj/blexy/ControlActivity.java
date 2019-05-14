@@ -14,6 +14,9 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.RotateAnimation;
+import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -22,6 +25,7 @@ import android.widget.Toast;
 import com.clj.blexy.Fragment.ControlFragment;
 import com.clj.blexy.Fragment.SetPositionFragment;
 import com.clj.blexy.Fragment.SettingFragment;
+import com.clj.blexy.comm.BleUtils;
 import com.clj.blexy.comm.Observer;
 import com.clj.blexy.comm.ObserverManager;
 import com.clj.fastble.BleManager;
@@ -67,6 +71,10 @@ public class ControlActivity extends AppCompatActivity implements View.OnClickLi
         layout_bottom = findViewById(R.id.layout_bottom);
         tv_back = findViewById(R.id.tv_back);
         tv_back.setOnClickListener(this);
+
+        imageView_1 = findViewById(R.id.img1);
+        imageView_3 = findViewById(R.id.img3);
+        imageView_4 = findViewById(R.id.img4);
         ObserverManager.getInstance().addObserver(this);
         initPage();
     }
@@ -84,12 +92,15 @@ public class ControlActivity extends AppCompatActivity implements View.OnClickLi
                 UUID uuid = service.getUuid();
                 for (BluetoothGattCharacteristic characteristic : service.getCharacteristics()) {
                     int charaProp = characteristic.getProperties();
+                    if ((charaProp | BluetoothGattCharacteristic.PROPERTY_WRITE) > 0) {
+                        characteristicWrite = characteristic;
 
+                    }
                     if ((charaProp | BluetoothGattCharacteristic.PROPERTY_WRITE_NO_RESPONSE) > 0) {
                         characteristicWrite = characteristic;
 
                     }
-                    writeBleMessage("0x05393ef9");
+                    writeBleMessage("0x10");
                     break;
 
                 }
@@ -102,11 +113,72 @@ public class ControlActivity extends AppCompatActivity implements View.OnClickLi
 
     }
 
-    private byte[] get_hex(String hex) {
-        Integer code = Integer.parseInt(hex);
-        code = code + 0x05;
+    public Integer source_degeree_left = 0;
+    public Integer source_degeree_right = 0;
+    private ImageView imageView_1;
+    private ImageView imageView_3;
+    private ImageView imageView_4;
+    float source_x, source_y;
 
-        return HexUtil.hexStringToBytes(hex);
+    public void setDegree_left(int todegeree) {
+        RotateAnimation rotateAni = new RotateAnimation(source_degeree_left, todegeree,
+                Animation.RELATIVE_TO_SELF, 1f, Animation.RELATIVE_TO_SELF,
+                0.5f);
+
+        //设置动画执行的时间，单位是毫秒
+        rotateAni.setDuration(100);
+
+        // 设置动画重复次数
+        // -1或者Animation.INFINITE表示无限重复，正数表示重复次数，0表示不重复只播放一次
+        rotateAni.setRepeatCount(0);
+        rotateAni.setFillAfter(true);
+        // 启动动画
+        imageView_1.startAnimation(rotateAni);
+        source_degeree_left = todegeree;
+
+    }
+
+    public void setDegree_right(int todegeree) {
+        RotateAnimation rotateAni = new RotateAnimation(source_degeree_right, todegeree,
+                Animation.RELATIVE_TO_SELF, 0f, Animation.RELATIVE_TO_SELF,
+                0.5f);
+
+        //设置动画执行的时间，单位是毫秒
+        rotateAni.setDuration(100);
+
+        // 设置动画重复次数
+        // -1或者Animation.INFINITE表示无限重复，正数表示重复次数，0表示不重复只播放一次
+        rotateAni.setRepeatCount(0);
+        rotateAni.setFillAfter(true);
+
+        // 启动动画
+        imageView_3.startAnimation(rotateAni);
+        source_degeree_left = todegeree;
+
+
+        double rect_angle = -todegeree / 180 * Math.PI;
+
+        int width = imageView_3.getWidth();
+        float x_position = (float) Math.cos(rect_angle) * width;
+        float y_position = (float) Math.sin(rect_angle) * width;
+        TranslateAnimation translateAni = new TranslateAnimation(source_x, -x_position, source_y, y_position);
+        Log.d(TAG, "setDegree_right: source_x" + source_x + "x_position" + x_position + "source_y" + source_y + "y_position" + y_position);
+        source_x = -x_position;
+        source_y = -y_position;
+        //设置动画执行的时间，单位是毫秒
+        translateAni.setDuration(100);
+        translateAni.setFillAfter(true);
+        // 设置动画重复次数
+        // -1或者Animation.INFINITE表示无限重复，正数表示重复次数，0表示不重复只播放一次
+        translateAni.setRepeatCount(0);
+        // 启动动画
+        imageView_4.startAnimation(translateAni);
+
+    }
+
+    public void disconnect() {
+        for (int i = 0; i < 4; i++)
+            BleUtils.writeBleCode(this, BleUtils.RELEASE_CODE);
     }
 
     public void writeBleMessage(String hex) {

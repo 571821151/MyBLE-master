@@ -23,7 +23,6 @@ public class MainBoard extends View {
     private Matrix matrix;
     private Matrix matrix1;
     private Matrix matrix2;
-    private Matrix matrix3;
 
     private Bitmap bitmap_left;
     private Bitmap bitmap_mid;

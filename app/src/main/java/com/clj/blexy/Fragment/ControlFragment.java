@@ -42,6 +42,8 @@ public class ControlFragment extends Fragment implements View.OnTouchListener {
 
 
     private MainBoard main_board;
+
+    private ControlActivity fatherActivity;
     private ScheduledExecutorService scheduledExecutor;
 
     @Override
@@ -66,8 +68,10 @@ public class ControlFragment extends Fragment implements View.OnTouchListener {
 
 
     private View initView(View v) {
-        main_board = (getActivity()).findViewById(R.id.img_main);
-
+        //main_board = (getActivity()).findViewById(R.id.img_main);
+        fatherActivity = (ControlActivity) getActivity();
+        degree_left = fatherActivity.source_degeree_left;
+        degree_right = fatherActivity.source_degeree_right;
 
         //left
         btn_left_up = v.findViewById(R.id.btn_left_up);
@@ -103,8 +107,7 @@ public class ControlFragment extends Fragment implements View.OnTouchListener {
             isTouched = true;
         } else if (event.getAction() == MotionEvent.ACTION_UP) {
             stopAddOrSubtract();    //手指抬起时停止发送
-            for (int i = 0; i < 4; i++)
-                BleUtils.writeBleCode(controlActivity, BleUtils.RELEASE_CODE);
+            fatherActivity.disconnect();
             isTouched = false;
         }
         return true;
@@ -121,7 +124,7 @@ public class ControlFragment extends Fragment implements View.OnTouchListener {
                 msg.what = vid;
                 handler.sendMessage(msg);
             }
-        }, 0, 130, TimeUnit.MILLISECONDS);    //每间隔130ms发送Message
+        }, 0, 100, TimeUnit.MILLISECONDS);    //每间隔100ms发送Message
     }
 
     private void stopAddOrSubtract() {
@@ -181,7 +184,8 @@ public class ControlFragment extends Fragment implements View.OnTouchListener {
                 degree_left = 60;
             if (degree_left < 0)
                 degree_left = 0;
-            main_board.SetLeftDegree(degree_left);
+//            main_board.SetLeftDegree(degree_left);
+            fatherActivity.setDegree_left(degree_left);
         }
 
         private void setDegreeForMid(boolean is_up) {
@@ -201,9 +205,11 @@ public class ControlFragment extends Fragment implements View.OnTouchListener {
                 degree_right = 0;
             if (degree_right < -60)
                 degree_right = -60;
+            fatherActivity.setDegree_left(degree_left);
+            fatherActivity.setDegree_right(degree_right);
 
-            main_board.SetLeftDegree(degree_left);
-            main_board.SetRightDegree(degree_right);
+//            main_board.SetLeftDegree(degree_left);
+//            main_board.SetRightDegree(degree_right);
         }
 
         private void setDegreeForRight(boolean is_up) {
@@ -216,8 +222,10 @@ public class ControlFragment extends Fragment implements View.OnTouchListener {
                 degree_right = 0;
             if (degree_right < -60)
                 degree_right = -60;
-            main_board.SetRightDegree(degree_right);
+//            main_board.SetRightDegree(degree_right);
+            fatherActivity.setDegree_right(degree_right);
         }
+
     };
 
 

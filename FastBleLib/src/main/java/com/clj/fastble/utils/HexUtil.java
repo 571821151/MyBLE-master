@@ -93,7 +93,9 @@ public class HexUtil {
         }
         return digit;
     }
-
+    public static String numToHex8(int b) {
+        return String.format("%02x", b);//2表示需要两个16进行数
+    }
 
     public static byte[] hexStringToBytes(String hexString) {
         if (hexString == null || hexString.equals("")) {
