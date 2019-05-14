@@ -74,7 +74,7 @@ public class OperateActivity extends BaseActivity implements View.OnClickListene
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.index_page);
-        initView();
+
         BleManager.getInstance().init(getApplication());
         BleManager.getInstance()
                 .enableLog(true)
@@ -82,6 +82,7 @@ public class OperateActivity extends BaseActivity implements View.OnClickListene
                 .setConnectOverTime(20000)
                 .setOperateTimeout(5000);
         ObserverManager.getInstance().addObserver(this);
+        initView();
 
     }
 

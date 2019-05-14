@@ -40,7 +40,9 @@ public class BleUtils {
     public static String RELEASE_CODE = "1A";//按键释放
     public static String SET_CODE = "0A";//设置键
     public static String SEND_CODE = "05";//发送命令
-    public static String END_CODE = "9F";//发送命令
+    public static String END_CODE = "F9";//发送命令
+    public static String READ_LEFT = "81";//左侧回显
+    public static String READ_RIGHT= "82";//右侧回显
 
 
     public static void writeBleCode(ControlActivity controlActivity, String ble_code) {

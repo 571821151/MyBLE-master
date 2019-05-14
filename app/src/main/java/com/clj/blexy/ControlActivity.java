@@ -29,7 +29,7 @@ import com.clj.blexy.comm.BleUtils;
 import com.clj.blexy.comm.Observer;
 import com.clj.blexy.comm.ObserverManager;
 import com.clj.fastble.BleManager;
-import com.clj.fastble.callback.BleReadCallback;
+import com.clj.fastble.callback.BleNotifyCallback;
 import com.clj.fastble.callback.BleWriteCallback;
 import com.clj.fastble.data.BleDevice;
 import com.clj.fastble.exception.BleException;
@@ -58,12 +58,17 @@ public class ControlActivity extends AppCompatActivity implements View.OnClickLi
 
     private BluetoothGattCharacteristic characteristicWrite;
     private BluetoothGattCharacteristic characteristicNotify;
+    private UUID serviceUUID;
+    private UUID writeUUID;
+    private UUID notifyUUID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_main);
-
+        serviceUUID = UUID.fromString("6e40fff0-b5a3-f393-e0a9-e50e24dcca9e");
+        writeUUID = UUID.fromString("6e40fff2-b5a3-f393-e0a9-e50e24dcca9e");
+        notifyUUID = UUID.fromString("6e40fff1-b5a3-f393-e0a9-e50e24dcca9e");
         btn_left = findViewById(R.id.btn_control_left);
         btn_left.setOnClickListener(this);
         btn_right = findViewById(R.id.btn_control_right);
@@ -86,7 +91,29 @@ public class ControlActivity extends AppCompatActivity implements View.OnClickLi
 
         prepareFragment();
         changePage(0);
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Thread.sleep(4000);
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            writeBleMessage(BleUtils.READ_RIGHT);
+                        }
+                    });
+                } catch (InterruptedException e) {
+                    Log.e(TAG, "run: ", e);
+
+                }
+
+            }
+        });
+        thread.start();
+
         bleDevice = getIntent().getParcelableExtra(KEY_DATA);
+
+        startNotify();
         if (bleDevice != null) {
             BluetoothGatt gatt = BleManager.getInstance().getBluetoothGatt(bleDevice);
             if (gatt == null) return;
@@ -102,12 +129,11 @@ public class ControlActivity extends AppCompatActivity implements View.OnClickLi
                         characteristicWrite = characteristic;
 
                     }
-                    writeBleMessage("0x10");
-                    break;
+                    // writeBleMessage("0x10");
+//                    break;
 
                 }
 
-                break;
             }
 
         }
@@ -155,17 +181,17 @@ public class ControlActivity extends AppCompatActivity implements View.OnClickLi
 
         // 启动动画
         imageView_3.startAnimation(rotateAni);
-        source_degeree_left = todegeree;
+        source_degeree_right = todegeree;
 
 
-        double rect_angle = -todegeree / 180 * Math.PI;
+        double rect_angle = -todegeree  * Math.PI/ 180;
 
         int width = imageView_3.getWidth();
         float x_position = (float) Math.cos(rect_angle) * width;
         float y_position = (float) Math.sin(rect_angle) * width;
-        TranslateAnimation translateAni = new TranslateAnimation(source_x, -x_position, source_y, y_position);
+        TranslateAnimation translateAni = new TranslateAnimation(source_x, x_position-width, source_y, -y_position);
         Log.d(TAG, "setDegree_right: source_x" + source_x + "x_position" + x_position + "source_y" + source_y + "y_position" + y_position);
-        source_x = -x_position;
+        source_x = -width+x_position;
         source_y = -y_position;
         //设置动画执行的时间，单位是毫秒
         translateAni.setDuration(100);
@@ -189,8 +215,8 @@ public class ControlActivity extends AppCompatActivity implements View.OnClickLi
         else {
             BleManager.getInstance().write(
                     bleDevice,
-                    characteristicWrite.getService().getUuid().toString(),
-                    characteristicWrite.getUuid().toString(),
+                    serviceUUID.toString(),
+                    writeUUID.toString(),
                     HexUtil.hexStringToBytes(hex),
                     new BleWriteCallback() {
 
@@ -199,7 +225,7 @@ public class ControlActivity extends AppCompatActivity implements View.OnClickLi
                             runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
-                                    Toast.makeText(ControlActivity.this, "" + HexUtil.formatHexString(justWrite, true), Toast.LENGTH_SHORT).show();
+                                   // Toast.makeText(ControlActivity.this, "" + HexUtil.formatHexString(justWrite, true), Toast.LENGTH_SHORT).show();
                                 }
                             });
                         }
@@ -209,7 +235,7 @@ public class ControlActivity extends AppCompatActivity implements View.OnClickLi
                             runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
-                                    Toast.makeText(ControlActivity.this, "" + "write failure", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(ControlActivity.this, "" + "write failure" + exception.getDescription(), Toast.LENGTH_SHORT).show();
                                 }
                             });
                         }
@@ -217,38 +243,33 @@ public class ControlActivity extends AppCompatActivity implements View.OnClickLi
         }
     }
 
-    public void readBleMessage(String hex) {
-        if (characteristicNotify == null)
-            return;
-        else {
-            BleManager.getInstance().read(
-                    bleDevice,
-                    characteristicNotify.getService().getUuid().toString(),
-                    characteristicNotify.getUuid().toString(),
-                    new BleReadCallback() {
+    public void startNotify() {
 
-                        @Override
-                        public void onReadSuccess(final byte[] data) {
-                            runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    /*todo for read message*/
-                                }
-                            });
-                        }
 
-                        @Override
-                        public void onReadFailure(final BleException exception) {
-                            runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    Toast.makeText(ControlActivity.this, "蓝牙读取失败", Toast.LENGTH_SHORT).show();
-                                }
-                            });
-                        }
-                    });
-        }
+        BleManager.getInstance().notify(
+                bleDevice,
+                serviceUUID.toString(),
+                notifyUUID.toString(),
+                new BleNotifyCallback() {
+                    @Override
+                    public void onNotifySuccess() {
+                         }
+
+                    @Override
+                    public void onNotifyFailure(BleException exception) {
+                        Toast.makeText(ControlActivity.this, "Notify failure", Toast.LENGTH_SHORT).show();
+
+                    }
+
+                    @Override
+                    public void onCharacteristicChanged(byte[] data) {
+                        String str = HexUtil.formatHexString(data);
+                        Toast.makeText(ControlActivity.this, "Notified  " + str, Toast.LENGTH_SHORT).show();
+
+                    }
+                });
     }
+
 
     public void changePage(int page) {
         currentPage = page;
