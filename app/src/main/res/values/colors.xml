@@ -20,4 +20,5 @@
     <drawable name="transparent">#00000000</drawable>
     <drawable name="line_color">#E5E5E5</drawable>
     <color name="adapter_back">#c5c9ca</color>
+    <color name="ghost_white">#F8F8FF</color>
 </resources>

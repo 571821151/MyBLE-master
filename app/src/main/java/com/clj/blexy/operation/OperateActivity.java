@@ -22,12 +22,15 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -63,6 +66,7 @@ public class OperateActivity extends BaseActivity implements View.OnClickListene
     private Button btn_search;
     private ListView listView_device;
     private ProgressDialog progressDialog;
+    private ProgressBar progressBar;
 
     //var
     private BleDevice device;
@@ -104,11 +108,18 @@ public class OperateActivity extends BaseActivity implements View.OnClickListene
         btn_link.setOnClickListener(this);
         btn_search = findViewById(R.id.btn_search);
         btn_search.setOnClickListener(this);
+        progressBar = findViewById(R.id.progressBar_cyclic);
 
         listView_device.setAdapter(matchedAdapter);
 
 
         progressDialog = new ProgressDialog(this);
+        progressDialog.getWindow().setGravity(Gravity.CENTER);
+        WindowManager.LayoutParams params = progressDialog.getWindow().getAttributes();
+        ( params).y = 100;
+        params.width=100;
+        params.height=100;
+        progressDialog.getWindow().setAttributes(params);
         checkPermissions();
     }
 
@@ -230,7 +241,11 @@ public class OperateActivity extends BaseActivity implements View.OnClickListene
         BleManager.getInstance().connect(bleDevice, new BleGattCallback() {
             @Override
             public void onStartConnect() {
+                progressBar.setVisibility(View.VISIBLE);
+
+                progressDialog.getWindow().setGravity(Gravity.CENTER|Gravity.CENTER_HORIZONTAL);
                 progressDialog.show();
+
             }
 
             @Override
@@ -238,6 +253,7 @@ public class OperateActivity extends BaseActivity implements View.OnClickListene
 //                img_loading.clearAnimation();
 //                img_loading.setVisibility(View.INVISIBLE);
 //                btn_scan.setText(getString(R.string.start_scan));
+                progressBar.setVisibility(View.INVISIBLE);
                 progressDialog.dismiss();
                 Toast.makeText(OperateActivity.this, getString(R.string.connect_fail), Toast.LENGTH_LONG).show();
             }
@@ -245,6 +261,8 @@ public class OperateActivity extends BaseActivity implements View.OnClickListene
             @Override
             public void onConnectSuccess(BleDevice bleDevice, BluetoothGatt gatt, int status) {
                 progressDialog.dismiss();
+                progressBar.setVisibility(View.INVISIBLE);
+
                 matchedAdapter.addDevice(bleDevice);
                 matchedAdapter.notifyDataSetChanged();
                 Intent intent = new Intent(getApplicationContext(), ControlActivity.class);
@@ -491,7 +509,7 @@ public class OperateActivity extends BaseActivity implements View.OnClickListene
                 }
             }
             if (position == cur_pos) {// 如果当前的行就是ListView中选中的一行，就更改显示样式
-                convertView.setBackgroundColor(getResources().getColor(R.color.adapter_back));// 更改整行的背景色
+                convertView.setBackgroundColor(getResources().getColor(R.color.ghost_white));// 更改整行的背景色
                 device = bleDevice;
             } else {
                 convertView.setBackgroundColor(getResources().getColor(R.color.white));// 更改整行的背景色

@@ -47,5 +47,6 @@
     <string name="control_right">MODE</string>
     <string name="ok">OK</string>
     <string name="flat">FLAT</string>
+    <string name="connecting">CONNECTING</string>
 
 </resources>

@@ -46,6 +46,7 @@
     <string name="control_right">模式</string>
     <string name="ok">确定</string>
     <string name="flat">平躺</string>
+    <string name="connecting">正在连接</string>
 
 
 </resources>
