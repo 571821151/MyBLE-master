@@ -114,11 +114,11 @@ public class OperateActivity extends BaseActivity implements View.OnClickListene
 
 
         progressDialog = new ProgressDialog(this);
-        progressDialog.getWindow().setGravity(Gravity.CENTER);
+//        progressDialog.getWindow().setGravity(Gravity.CENTER);
         WindowManager.LayoutParams params = progressDialog.getWindow().getAttributes();
-        ( params).y = 100;
-        params.width=100;
-        params.height=100;
+        (params).y = 100;
+        params.width = 100;
+        params.height = 100;
         progressDialog.getWindow().setAttributes(params);
         checkPermissions();
     }
@@ -243,7 +243,7 @@ public class OperateActivity extends BaseActivity implements View.OnClickListene
             public void onStartConnect() {
                 progressBar.setVisibility(View.VISIBLE);
 
-                progressDialog.getWindow().setGravity(Gravity.CENTER|Gravity.CENTER_HORIZONTAL);
+                progressDialog.getWindow().setGravity(Gravity.CENTER | Gravity.CENTER_HORIZONTAL);
                 progressDialog.show();
 
             }
@@ -500,6 +500,7 @@ public class OperateActivity extends BaseActivity implements View.OnClickListene
             if (bleDevice != null) {
                 boolean isConnected = BleManager.getInstance().isConnected(bleDevice);
                 String name = bleDevice.getName();
+                if (name.length() == 0) name = "Unknown device";
                 holder.txt_name.setText(name);
                 if (isConnected) {
                     holder.txt_name.setTextColor(0xFF1DE9B6);

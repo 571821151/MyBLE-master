@@ -72,10 +72,9 @@ public class SettingFragment extends Fragment implements View.OnClickListener {
                 break;
             case R.id.layout_p2:
                 BleUtils.writeBleCode(controlActivity, BleUtils.MEMORY_POSITION_TWO);
-
                 break;
             case R.id.layout_p3:
-                BleUtils.writeBleCode(controlActivity, BleUtils.MEMORY_POSITION_FOUR);
+                BleUtils.writeBleCode(controlActivity, BleUtils.MEMORY_POSITION_THREE);
 
                 break;
             case R.id.layout_flat:

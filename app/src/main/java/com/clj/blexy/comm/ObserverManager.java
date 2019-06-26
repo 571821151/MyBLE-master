@@ -6,6 +6,9 @@ import com.clj.fastble.data.BleDevice;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 观察者模型，用于Ble设备断开
+ */
 public class ObserverManager implements Observable {
 
     public static ObserverManager getInstance() {

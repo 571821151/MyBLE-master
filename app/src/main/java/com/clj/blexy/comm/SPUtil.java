@@ -5,6 +5,9 @@ import android.content.SharedPreferences;
 
 import java.util.Locale;
 
+/**
+ * 语言设置类
+ */
 public class SPUtil {
 
     private final String SP_NAME = "language_setting";

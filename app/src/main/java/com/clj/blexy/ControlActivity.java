@@ -79,9 +79,9 @@ public class ControlActivity extends AppCompatActivity implements View.OnClickLi
         tv_back = findViewById(R.id.tv_back);
         tv_back.setOnClickListener(this);
 
-        imageView_1 = findViewById(R.id.img1);
-        imageView_3 = findViewById(R.id.img3);
-        imageView_4 = findViewById(R.id.img4);
+        imageView_head = findViewById(R.id.img1);
+        imageView_leg_one = findViewById(R.id.img3);
+        imageView_leg_two = findViewById(R.id.img4);
         ObserverManager.getInstance().addObserver(this);
         initPage();
     }
@@ -95,11 +95,13 @@ public class ControlActivity extends AppCompatActivity implements View.OnClickLi
             @Override
             public void run() {
                 try {
-                    Thread.sleep(4000);
+                    Thread.sleep(14000);
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
                             writeBleMessage(BleUtils.READ_RIGHT);
+                            //自动挂掉
+                            onDestroy();
                         }
                     });
                 } catch (InterruptedException e) {
@@ -141,15 +143,20 @@ public class ControlActivity extends AppCompatActivity implements View.OnClickLi
 
     }
 
-    public Integer source_degeree_left = 0;
-    public Integer source_degeree_right = 0;
-    private ImageView imageView_1;
-    private ImageView imageView_3;
-    private ImageView imageView_4;
+    public Integer source_degree_left = 0;
+    public Integer source_degree_right = 0;
+    private ImageView imageView_head;
+    private ImageView imageView_leg_one;
+    private ImageView imageView_leg_two;
     float source_x, source_y;
 
+    /**
+     * 设置左边图片动画
+     *
+     * @param todegeree
+     */
     public void setDegree_left(int todegeree) {
-        RotateAnimation rotateAni = new RotateAnimation(source_degeree_left, todegeree,
+        RotateAnimation rotateAni = new RotateAnimation(source_degree_left, todegeree,
                 Animation.RELATIVE_TO_SELF, 1f, Animation.RELATIVE_TO_SELF,
                 0.5f);
 
@@ -161,13 +168,14 @@ public class ControlActivity extends AppCompatActivity implements View.OnClickLi
         rotateAni.setRepeatCount(0);
         rotateAni.setFillAfter(true);
         // 启动动画
-        imageView_1.startAnimation(rotateAni);
-        source_degeree_left = todegeree;
+        imageView_head.startAnimation(rotateAni);
+        source_degree_left = todegeree;
 
     }
 
+    //设置右边图片动画
     public void setDegree_right(int todegeree) {
-        RotateAnimation rotateAni = new RotateAnimation(source_degeree_right, todegeree,
+        RotateAnimation rotateAni = new RotateAnimation(source_degree_right, todegeree,
                 Animation.RELATIVE_TO_SELF, 0f, Animation.RELATIVE_TO_SELF,
                 0.5f);
 
@@ -180,18 +188,18 @@ public class ControlActivity extends AppCompatActivity implements View.OnClickLi
         rotateAni.setFillAfter(true);
 
         // 启动动画
-        imageView_3.startAnimation(rotateAni);
-        source_degeree_right = todegeree;
+        imageView_leg_one.startAnimation(rotateAni);
+        source_degree_right = todegeree;
 
 
-        double rect_angle = -todegeree  * Math.PI/ 180;
+        double rect_angle = -todegeree * Math.PI / 180;
 
-        int width = imageView_3.getWidth();
+        int width = imageView_leg_one.getWidth();
         float x_position = (float) Math.cos(rect_angle) * width;
         float y_position = (float) Math.sin(rect_angle) * width;
-        TranslateAnimation translateAni = new TranslateAnimation(source_x, x_position-width, source_y, -y_position);
+        TranslateAnimation translateAni = new TranslateAnimation(source_x, x_position - width, source_y, -y_position);
         Log.d(TAG, "setDegree_right: source_x" + source_x + "x_position" + x_position + "source_y" + source_y + "y_position" + y_position);
-        source_x = -width+x_position;
+        source_x = -width + x_position;
         source_y = -y_position;
         //设置动画执行的时间，单位是毫秒
         translateAni.setDuration(100);
@@ -200,7 +208,7 @@ public class ControlActivity extends AppCompatActivity implements View.OnClickLi
         // -1或者Animation.INFINITE表示无限重复，正数表示重复次数，0表示不重复只播放一次
         translateAni.setRepeatCount(0);
         // 启动动画
-        imageView_4.startAnimation(translateAni);
+        imageView_leg_two.startAnimation(translateAni);
 
     }
 
@@ -225,7 +233,7 @@ public class ControlActivity extends AppCompatActivity implements View.OnClickLi
                             runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
-                                   // Toast.makeText(ControlActivity.this, "" + HexUtil.formatHexString(justWrite, true), Toast.LENGTH_SHORT).show();
+                                    // Toast.makeText(ControlActivity.this, "" + HexUtil.formatHexString(justWrite, true), Toast.LENGTH_SHORT).show();
                                 }
                             });
                         }
@@ -244,8 +252,6 @@ public class ControlActivity extends AppCompatActivity implements View.OnClickLi
     }
 
     public void startNotify() {
-
-
         BleManager.getInstance().notify(
                 bleDevice,
                 serviceUUID.toString(),
@@ -253,7 +259,7 @@ public class ControlActivity extends AppCompatActivity implements View.OnClickLi
                 new BleNotifyCallback() {
                     @Override
                     public void onNotifySuccess() {
-                         }
+                    }
 
                     @Override
                     public void onNotifyFailure(BleException exception) {
@@ -291,6 +297,7 @@ public class ControlActivity extends AppCompatActivity implements View.OnClickLi
         super.onDestroy();
         ObserverManager.getInstance().deleteObserver(this);
     }
+
 
     private void updateFragment(int position) {
         if (position > fragments.size() - 1) {
@@ -380,5 +387,19 @@ public class ControlActivity extends AppCompatActivity implements View.OnClickLi
         //关闭Activity
 
         this.finish();
+    }
+
+    /**
+     * 设置主面板动画
+     *
+     * @param leftPercent
+     * @param rightPercent
+     */
+    public void setMainAnime(int leftPercent, int rightPercent) {
+        int degeree = leftPercent * ControlFragment.MAX_DEGEREE;
+        setDegree_left(degeree);
+        degeree = rightPercent * ControlFragment.MAX_DEGEREE;
+        setDegree_right(degeree);
+
     }
 }

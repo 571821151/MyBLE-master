@@ -12,7 +12,6 @@ import android.widget.Button;
 
 import com.clj.blexy.ControlActivity;
 import com.clj.blexy.R;
-import com.clj.blexy.View.MainBoard;
 import com.clj.blexy.comm.BleUtils;
 
 import java.util.concurrent.Executors;
@@ -26,6 +25,7 @@ public class ControlFragment extends Fragment implements View.OnTouchListener {
     private final String TAG = getClass().getName();
     private int degree_left = 0;
     private int degree_right = 0;
+    public static final  int MAX_DEGEREE=60;
 
     private ControlActivity controlActivity;
 
@@ -41,7 +41,7 @@ public class ControlFragment extends Fragment implements View.OnTouchListener {
     private Button btn_right_down;
 
 
-    private MainBoard main_board;
+//    private MainBoard main_board;
 
     private ControlActivity fatherActivity;
     private ScheduledExecutorService scheduledExecutor;
@@ -70,8 +70,8 @@ public class ControlFragment extends Fragment implements View.OnTouchListener {
     private View initView(View v) {
         //main_board = (getActivity()).findViewById(R.id.img_main);
         fatherActivity = (ControlActivity) getActivity();
-        degree_left = fatherActivity.source_degeree_left;
-        degree_right = fatherActivity.source_degeree_right;
+        degree_left = fatherActivity.source_degree_left;
+        degree_right = fatherActivity.source_degree_right;
 
         //left
         btn_left_up = v.findViewById(R.id.btn_left_up);
@@ -180,8 +180,8 @@ public class ControlFragment extends Fragment implements View.OnTouchListener {
                 degree_left += 4;
             else
                 degree_left -= 4;
-            if (degree_left > 60)
-                degree_left = 60;
+            if (degree_left > MAX_DEGEREE)
+                degree_left = MAX_DEGEREE;
             if (degree_left < 0)
                 degree_left = 0;
 //            main_board.SetLeftDegree(degree_left);
@@ -197,14 +197,14 @@ public class ControlFragment extends Fragment implements View.OnTouchListener {
                 degree_left -= 4;
                 degree_right += 4;
             }
-            if (degree_left > 60)
-                degree_left = 60;
+            if (degree_left > MAX_DEGEREE)
+                degree_left = MAX_DEGEREE;
             if (degree_left < 0)
                 degree_left = 0;
             if (degree_right > 0)
                 degree_right = 0;
-            if (degree_right < -60)
-                degree_right = -60;
+            if (degree_right < -MAX_DEGEREE)
+                degree_right = -MAX_DEGEREE;
             fatherActivity.setDegree_left(degree_left);
             fatherActivity.setDegree_right(degree_right);
 
@@ -220,8 +220,8 @@ public class ControlFragment extends Fragment implements View.OnTouchListener {
                 degree_right += 4;
             if (degree_right > 0)
                 degree_right = 0;
-            if (degree_right < -60)
-                degree_right = -60;
+            if (degree_right < -MAX_DEGEREE)
+                degree_right = -MAX_DEGEREE;
 //            main_board.SetRightDegree(degree_right);
             fatherActivity.setDegree_right(degree_right);
         }

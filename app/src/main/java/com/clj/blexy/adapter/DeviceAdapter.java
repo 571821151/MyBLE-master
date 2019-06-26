@@ -2,6 +2,7 @@ package com.clj.blexy.adapter;
 
 
 import android.content.Context;
+import android.media.Image;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
