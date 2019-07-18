@@ -62,6 +62,8 @@ public class ControlActivity extends AppCompatActivity implements View.OnClickLi
     private UUID writeUUID;
     private UUID notifyUUID;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -95,13 +97,14 @@ public class ControlActivity extends AppCompatActivity implements View.OnClickLi
             @Override
             public void run() {
                 try {
+                    writeBleMessage(BleUtils.LENGTH_DETECT);
                     Thread.sleep(14000);
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
                             writeBleMessage(BleUtils.READ_RIGHT);
                             //自动挂掉
-                            onDestroy();
+                           // onDestroy();
                         }
                     });
                 } catch (InterruptedException e) {

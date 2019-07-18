@@ -41,8 +41,8 @@ public class BleUtils {
     public static String SET_CODE = "0A";//设置键
     public static String SEND_CODE = "05";//发送命令
     public static String END_CODE = "F9";//发送命令
-    public static String READ_LEFT = "B1";//左侧回显
-    public static String READ_RIGHT= "B2";//右侧回显
+    public static String READ_LEFT = "81";//左侧回显
+    public static String READ_RIGHT= "82";//右侧回显
     public static String LENGTH_DETECT  = "0B";//长度检测
 
 

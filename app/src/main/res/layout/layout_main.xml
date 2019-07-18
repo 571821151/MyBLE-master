@@ -50,7 +50,7 @@
 
                 <ImageView
                     android:id="@+id/img1"
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="17dp"
                     android:layout_weight="1"
                     android:src="@mipmap/log1" />
@@ -58,7 +58,7 @@
                 <ImageView
                     android:id="@+id/img2"
 
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="17dp"
                     android:layout_weight="1"
                     android:src="@mipmap/logo2" />
@@ -67,14 +67,14 @@
 
                     android:id="@+id/img3"
 
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="17dp"
                     android:layout_weight="1"
                     android:src="@mipmap/log4" />
 
                 <ImageView
                     android:id="@+id/img4"
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="17dp"
                     android:layout_weight="1"
                     android:src="@mipmap/logo4" />

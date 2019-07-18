@@ -65,7 +65,7 @@ public class OperateActivity extends BaseActivity implements View.OnClickListene
     private Button btn_link;
     private Button btn_search;
     private ListView listView_device;
-    private ProgressDialog progressDialog;
+    //    private ProgressDialog progressDialog;
     private ProgressBar progressBar;
 
     //var
@@ -73,6 +73,13 @@ public class OperateActivity extends BaseActivity implements View.OnClickListene
 
 
     private int cur_pos;//当前行
+
+    @Override
+    public void onBackPressed() {
+        // super.onBackPressed();//注释掉这行,back键不退出activity
+        progressBar.setVisibility(View.INVISIBLE);
+
+    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -113,13 +120,12 @@ public class OperateActivity extends BaseActivity implements View.OnClickListene
         listView_device.setAdapter(matchedAdapter);
 
 
-        progressDialog = new ProgressDialog(this);
-//        progressDialog.getWindow().setGravity(Gravity.CENTER);
-        WindowManager.LayoutParams params = progressDialog.getWindow().getAttributes();
-        (params).y = 100;
-        params.width = 100;
-        params.height = 100;
-        progressDialog.getWindow().setAttributes(params);
+//        progressDialog = new ProgressDialog(this);
+//        WindowManager.LayoutParams params = progressDialog.getWindow().getAttributes();
+//        (params).y = 100;
+//        params.width = 100;
+//        params.height = 100;
+//        progressDialog.getWindow().setAttributes(params);
         checkPermissions();
     }
 
@@ -243,8 +249,8 @@ public class OperateActivity extends BaseActivity implements View.OnClickListene
             public void onStartConnect() {
                 progressBar.setVisibility(View.VISIBLE);
 
-                progressDialog.getWindow().setGravity(Gravity.CENTER | Gravity.CENTER_HORIZONTAL);
-                progressDialog.show();
+//                progressDialog.getWindow().setGravity(Gravity.CENTER | Gravity.CENTER_HORIZONTAL);
+//                progressDialog.show();
 
             }
 
@@ -254,13 +260,13 @@ public class OperateActivity extends BaseActivity implements View.OnClickListene
 //                img_loading.setVisibility(View.INVISIBLE);
 //                btn_scan.setText(getString(R.string.start_scan));
                 progressBar.setVisibility(View.INVISIBLE);
-                progressDialog.dismiss();
+//                progressDialog.dismiss();
                 Toast.makeText(OperateActivity.this, getString(R.string.connect_fail), Toast.LENGTH_LONG).show();
             }
 
             @Override
             public void onConnectSuccess(BleDevice bleDevice, BluetoothGatt gatt, int status) {
-                progressDialog.dismiss();
+//                progressDialog.dismiss();
                 progressBar.setVisibility(View.INVISIBLE);
 
                 matchedAdapter.addDevice(bleDevice);
@@ -272,7 +278,7 @@ public class OperateActivity extends BaseActivity implements View.OnClickListene
 
             @Override
             public void onDisConnected(boolean isActiveDisConnected, BleDevice bleDevice, BluetoothGatt gatt, int status) {
-                progressDialog.dismiss();
+//                progressDialog.dismiss();
                 matchedAdapter.removeDevice(bleDevice);
                 matchedAdapter.notifyDataSetChanged();
 
@@ -500,7 +506,8 @@ public class OperateActivity extends BaseActivity implements View.OnClickListene
             if (bleDevice != null) {
                 boolean isConnected = BleManager.getInstance().isConnected(bleDevice);
                 String name = bleDevice.getName();
-                if (name.length() == 0) name = "Unknown device";
+                if (name == null) name = "Unknown device";
+
                 holder.txt_name.setText(name);
                 if (isConnected) {
                     holder.txt_name.setTextColor(0xFF1DE9B6);
