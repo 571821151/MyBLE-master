@@ -21,10 +21,10 @@ public class SettingFragment extends Fragment implements View.OnClickListener {
     private ImageButton btn_setting_position;
 
 
-    private LinearLayout layout_p1;
-    private LinearLayout layout_p2;
-    private LinearLayout layout_p3;
-    private LinearLayout layout_flat;
+    private ImageButton layout_p1;
+    private ImageButton layout_p2;
+    private ImageButton layout_p3;
+    private ImageButton layout_flat;
 
 
     private ControlActivity controlActivity;

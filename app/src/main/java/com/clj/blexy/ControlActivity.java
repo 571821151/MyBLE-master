@@ -63,7 +63,6 @@ public class ControlActivity extends AppCompatActivity implements View.OnClickLi
     private UUID notifyUUID;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -104,7 +103,7 @@ public class ControlActivity extends AppCompatActivity implements View.OnClickLi
                         public void run() {
                             writeBleMessage(BleUtils.READ_RIGHT);
                             //自动挂掉
-                           // onDestroy();
+                            // onDestroy();
                         }
                     });
                 } catch (InterruptedException e) {
@@ -122,23 +121,38 @@ public class ControlActivity extends AppCompatActivity implements View.OnClickLi
         if (bleDevice != null) {
             BluetoothGatt gatt = BleManager.getInstance().getBluetoothGatt(bleDevice);
             if (gatt == null) return;
+            // Toast.makeText(this, gatt.getServices().size(), Toast.LENGTH_SHORT).show();
             for (BluetoothGattService service : gatt.getServices()) {
-                UUID uuid = service.getUuid();
-                for (BluetoothGattCharacteristic characteristic : service.getCharacteristics()) {
-                    int charaProp = characteristic.getProperties();
-                    if ((charaProp | BluetoothGattCharacteristic.PROPERTY_NOTIFY) > 0) {
-                        characteristicNotify = characteristic;
+                if (service.getUuid().toString().contains("fff0")) {
+                    serviceUUID = service.getUuid();
 
-                    }
-                    if ((charaProp | BluetoothGattCharacteristic.PROPERTY_WRITE_NO_RESPONSE) > 0) {
-                        characteristicWrite = characteristic;
 
-                    }
-                    // writeBleMessage("0x10");
+                    for (BluetoothGattCharacteristic characteristic : service.getCharacteristics()) {
+                        int charaProp = characteristic.getProperties();
+                        if ((charaProp | BluetoothGattCharacteristic.PROPERTY_NOTIFY) > 0) {
+                            Toast.makeText(this, characteristic.getUuid().toString(), Toast.LENGTH_SHORT).show();
+                            characteristicNotify = characteristic;
+                            UUID uuid = characteristic.getUuid();
+
+
+                            if (uuid.toString().contains("fff2")) {
+                                writeUUID = uuid;
+                            }
+                            if (uuid.toString().contains("fff1")) {
+                                notifyUUID = uuid;
+                            }
+                        }
+//                    if ((charaProp | BluetoothGattCharacteristic.PROPERTY_WRITE_NO_RESPONSE) > 0) {
+//                        Toast.makeText(this, characteristic.getUuid().toString(), Toast.LENGTH_SHORT).show();
+//                        characteristicWrite = characteristic;
+//                        writeUUID = characteristic.getUuid();
+//
+//                    }
+                        // writeBleMessage("0x10");
 //                    break;
 
+                    }
                 }
-
             }
 
         }
@@ -221,38 +235,37 @@ public class ControlActivity extends AppCompatActivity implements View.OnClickLi
     }
 
     public void writeBleMessage(String hex) {
-        if (characteristicWrite == null)
-            return;
-        else {
-            BleManager.getInstance().write(
-                    bleDevice,
-                    serviceUUID.toString(),
-                    writeUUID.toString(),
-                    HexUtil.hexStringToBytes(hex),
-                    new BleWriteCallback() {
 
-                        @Override
-                        public void onWriteSuccess(final int current, final int total, final byte[] justWrite) {
-                            runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    // Toast.makeText(ControlActivity.this, "" + HexUtil.formatHexString(justWrite, true), Toast.LENGTH_SHORT).show();
-                                }
-                            });
-                        }
 
-                        @Override
-                        public void onWriteFailure(final BleException exception) {
-                            runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    Toast.makeText(ControlActivity.this, "" + "write failure" + exception.getDescription(), Toast.LENGTH_SHORT).show();
-                                }
-                            });
-                        }
-                    });
-        }
+        BleManager.getInstance().write(
+                bleDevice,
+                serviceUUID.toString(),
+                writeUUID.toString(),
+                HexUtil.hexStringToBytes(hex),
+                new BleWriteCallback() {
+
+                    @Override
+                    public void onWriteSuccess(final int current, final int total, final byte[] justWrite) {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                // Toast.makeText(ControlActivity.this, "" + HexUtil.formatHexString(justWrite, true), Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }
+
+                    @Override
+                    public void onWriteFailure(final BleException exception) {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(ControlActivity.this, "" + "write failure" + exception.getDescription(), Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }
+                });
     }
+
 
     public void startNotify() {
         BleManager.getInstance().notify(

@@ -78,11 +78,15 @@ public class SetPositionFragment extends Fragment implements View.OnClickListene
 
                 break;
             case R.id.btn_set:
-                request_code = BleUtils.SET_MEMORY_POSITION_ONE;
-                BleUtils.writeBleCode(controlActivity, request_code);
-                BleUtils.writeBleCode(controlActivity, BleUtils.SET_CODE);
-                ((ControlActivity) getActivity()).changePage(1);
-                break;
+               if(!request_code.isEmpty()) {
+                   for( int i=0;i<5 ;i++)
+                   {
+                       BleUtils.writeBleCode(controlActivity, BleUtils.SET_CODE);
+                       BleUtils.writeBleCode(controlActivity, request_code);
+                   }
+
+                   ((ControlActivity) getActivity()).changePage(1);
+               }break;
             case R.id.btn_cancel_set:
                 ((ControlActivity) getActivity()).changePage(1);
                 break;

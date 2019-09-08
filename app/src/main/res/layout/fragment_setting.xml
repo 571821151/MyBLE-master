@@ -29,8 +29,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-
-
                 android:textColor="#ff595959"
                 android:textSize="15sp"
                 android:text="M"/>
@@ -50,7 +48,7 @@
             android:orientation="vertical">
 
             <LinearLayout
-                android:id="@+id/layout_p1"
+
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="2"
@@ -67,6 +65,7 @@
                     android:orientation="vertical">
 
                     <ImageButton
+                        android:id="@+id/layout_p1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
@@ -84,7 +83,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/layout_p2"
+
 
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -102,6 +101,7 @@
                     android:orientation="vertical">
 
                     <ImageButton
+                        android:id="@+id/layout_p2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
@@ -116,7 +116,7 @@
 
                         android:textColor="#ff595959"
                         android:textSize="15sp"
-                        android:text="M"/>
+                        android:text="P2"/>
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
@@ -128,7 +128,7 @@
             android:orientation="vertical">
 
             <LinearLayout
-                android:id="@+id/layout_p3"
+
 
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -147,6 +147,7 @@
                     android:orientation="vertical">
 
                     <ImageButton
+                        android:id="@+id/layout_p3"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
@@ -166,7 +167,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/layout_flat"
+
 
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -184,6 +185,7 @@
                     android:orientation="vertical">
 
                     <ImageButton
+                        android:id="@+id/layout_flat"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
